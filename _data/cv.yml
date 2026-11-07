@@ -1,7 +1,7 @@
 # CV shown on the /cv/ page. Fill the TODO entries from your resume (or send me your CV and I will fill them).
 cv:
   name: Jebun Naher Keya
-  label: TODO-position, IRIS Lab, UNIST
+  label: IRIS Lab, UNIST
   email: jnkeya@unist.ac.kr
   location: Ulsan, Republic of Korea
   image: ""
@@ -11,10 +11,7 @@ cv:
     Education:
       - institution: Ulsan National Institute of Science and Technology (UNIST)
         location: Ulsan, Republic of Korea
-        area: TODO (e.g., Civil, Urban, Earth, and Environmental Engineering)
-        studyType: TODO (e.g., PhD)
-        start_date: TODO
-        end_date: present
+        area: Civil, Urban, Earth, and Environmental Engineering
 
     Publications:
       - title: "Enhanced methane monitoring: a globally harmonized daily 0.1° XCH4 through machine learning-based fusion of GOSAT, GOSAT-2, and TROPOMI"

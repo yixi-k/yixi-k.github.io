@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2026-06-01 # TODO: set the AMT publication date
+date: 2026-06-30
 inline: true
 related_posts: false
 ---
