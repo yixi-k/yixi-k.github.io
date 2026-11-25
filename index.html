@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta property="og:title" content="Jebun Naher Keya">
-<meta property="og:description" content="Machine learning for satellite Earth observation: global methane mapping, atmospheric composition and precipitation nowcasting.">
+<meta property="og:description" content="Data scientist and AI researcher: machine learning and deep learning across fields.">
 <meta property="og:url" content="https://yixi-k.github.io/">
 <link rel="canonical" href="https://yixi-k.github.io/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22%236fb6e8%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%225%22 fill=%22%23f08a5d%22/%3E%3C/svg%3E">
 <title>Jebun Naher Keya</title>
-<meta name="description" content="Jebun Naher Keya — machine learning for satellite Earth observation: global methane mapping, atmospheric composition and precipitation nowcasting. PhD candidate, UNIST.">
+<meta name="description" content="Jebun Naher Keya — data scientist and AI researcher. Machine learning and deep learning across fields, with a PhD in AI for Earth observation at UNIST.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -86,6 +86,12 @@ nav.top ul a:hover { color: var(--fg); }
 .about .yr { display: block; font: 400 .74rem var(--font-mono); color: var(--muted); }
 @media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
 
+.pctl { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 .7rem var(--font-mono); background: var(--bg2); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.chip:hover { color: var(--fg); border-color: var(--accent); }
+#cA::first-letter { color: var(--accent); } #cB::first-letter { color: var(--warm); }
+canvas#play { width: 100%; height: auto; aspect-ratio: 8 / 5; display: block; border-radius: 8px; background: var(--bg2); cursor: crosshair; touch-action: manipulation; }
+
 /* cite */
 .bib { margin: 12px 0 0; background: var(--bg2); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font: 400 .74rem/1.55 var(--font-mono); color: var(--fg); overflow-x: auto; white-space: pre; }
 .copied { font: 500 .72rem var(--font-mono); color: var(--accent); align-self: center; }
@@ -128,6 +134,7 @@ nav.top ul a:hover { color: var(--fg); }
 .toggle { display: inline-flex; background: var(--bg2); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .toggle button { font: 500 .72rem var(--font-mono); border: 0; background: transparent; color: var(--muted); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
 .toggle button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+canvas#play { cursor: crosshair; }
 canvas#field { width: 100%; height: auto; aspect-ratio: 2 / 1; display: block; border-radius: 8px; background: var(--bg2); image-rendering: pixelated; }
 .simfoot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; font: 400 .7rem var(--font-mono); color: var(--muted); }
 .bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#fee090,#fdae61,#f46d43,#d73027,#a50026); }
@@ -260,21 +267,20 @@ img{max-width:100%}[hidden]{display:none!important}
 <header class="hero" id="top">
   <div class="in">
     <div>
-      <div class="kicker">Machine learning × Earth observation</div>
-      <h1>Reading the <em>atmosphere</em> from orbit.</h1>
+      <div class="kicker">Data science · Machine learning · AI</div>
+      <h1>I turn messy data into <em>models that work</em>.</h1>
       <div class="profile">
         <div class="avatar"><span aria-label="Photo placeholder">JK</span></div>
         <div>
-          <p class="who"><b>Jebun Naher Keya</b> · PhD candidate, Environmental Engineering</p>
+          <p class="who"><b>Jebun Naher Keya</b> · Data scientist &amp; PhD candidate</p>
           <p class="where">IRIS Lab, UNIST · Ulsan, South Korea</p>
         </div>
       </div>
-      <p class="bio">I build <b>machine learning and deep learning models that turn incomplete satellite data into
-        reliable maps</b>. My main work is global methane mapping, cutting the uncertainty in satellite XCH₄ so
-        emissions can be tracked against the Global Methane Pledge's 2030 target. I also work on ammonia, ozone,
-        precipitation nowcasting and agentic AI.</p>
+      <p class="bio">I'm a <b>data scientist and AI researcher</b>. I build machine learning and deep learning models,
+        from gradient boosting to Transformers, Mamba and KAN, and I like testing them on data from any field.
+        My PhD applies them to satellite Earth observation; my side projects take them everywhere else.</p>
       <div class="cta">
-        <a class="btn solid" href="#publications">See my research</a>
+        <a class="btn solid" href="#projects">See my projects</a>
         <a class="btn" href="https://github.com/yixi-k">GitHub</a>
         <a class="btn" aria-disabled="true">CV</a>
       </div>
@@ -288,28 +294,33 @@ img{max-width:100%}[hidden]{display:none!important}
 
     <figure class="sim" style="margin:0">
       <div class="simhead">
-        <span class="live" id="phase">Satellites scanning</span>
-        <div class="toggle" role="group" aria-label="View">
-          <button id="b-obs" type="button" aria-pressed="false">Observed</button>
-          <button id="b-ml" type="button" aria-pressed="true">ML gap-filled</button>
+        <span class="live" id="pstate">Neural network training</span>
+        <div class="toggle" role="group" aria-label="Class to add">
+          <button id="cA" type="button" aria-pressed="true">● Class A</button>
+          <button id="cB" type="button" aria-pressed="false">● Class B</button>
         </div>
       </div>
-      <canvas id="field" width="360" height="180" aria-label="Animation: satellite swaths sample a global field, then a model fills the gaps"></canvas>
+      <canvas id="play" width="480" height="300" aria-label="Interactive demo: click to add data points; a small neural network learns to separate the two classes"></canvas>
       <div class="simfoot">
-        <div class="bar" aria-hidden="true"></div>
-        <span>coverage <span class="readout" id="cov">0%</span></span>
+        <div class="pctl">
+          <button class="chip" type="button" data-ds="moons">Moons</button>
+          <button class="chip" type="button" data-ds="circles">Circles</button>
+          <button class="chip" type="button" data-ds="xor">XOR</button>
+          <button class="chip" type="button" data-ds="clear">Clear</button>
+        </div>
+        <span>epoch <span class="readout" id="ep">0</span> · loss <span class="readout" id="loss">–</span></span>
       </div>
-      <figcaption class="note">Illustration of satellite gap-filling on a synthetic field, not real data.</figcaption>
+      <figcaption class="note">Click the plot to add points. A 2-16-16-1 network retrains live in your browser.</figcaption>
     </figure>
   </div>
 </header>
 
 <div class="stats">
   <div class="in">
-    <div class="stat"><b>0.81</b><span>R² of our fused methane product at withheld ground sites</span></div>
-    <div class="stat"><b>10.78<small> ppb</small></b><span>RMSE at the same sites</span></div>
-    <div class="stat"><b>6</b><span>conference presentations, incl. an invited oral at SPIE 2026</span></div>
-    <div class="stat"><b>4</b><span>atmospheric domains: CH₄, NH₃, O₃, precipitation</span></div>
+    <div class="stat"><b>8</b><span>model families I work with, from gradient boosting to Mamba and KAN</span></div>
+    <div class="stat"><b>2</b><span>peer-reviewed papers, plus an open dataset</span></div>
+    <div class="stat"><b>6</b><span>conference talks and posters, incl. an invited oral at SPIE 2026</span></div>
+    <div class="stat"><b>ICML</b><span>attended ICML 2026 in Seoul</span></div>
   </div>
 </div>
 
@@ -319,25 +330,22 @@ img{max-width:100%}[hidden]{display:none!important}
       <div class="sechead"><span class="label">About</span><h2>Hi, I'm Jebun.</h2></div>
       <div class="about">
         <div>
-          <p>I'm a PhD candidate in Environmental Engineering at UNIST, South Korea, in the
-            Intelligent Remote Sensing and Geospatial Science (IRIS) Lab. I build <b>machine learning and deep
-            learning models for satellite Earth observation</b>.</p>
-          <p>My main line of work is <b>global methane mapping</b>: reducing the uncertainty in satellite XCH₄ so that
-            emissions can be tracked with confidence. In parallel I work on <b>precipitation nowcasting</b> for
-            early warning, on ammonia and ozone, and I experiment with agentic AI.</p>
-          <p>Outside Earth observation, I'm into <b>data science in general</b>. For fun, I pick up datasets from
-            fields far from my own and build small projects around them. You'll find them below.</p>
+          <p>I'm into <b>data science and artificial intelligence</b>: finding the structure in a dataset, picking the
+            right model for it, and checking honestly whether it generalizes. My hobby is grabbing datasets from
+            fields far from my own and building small projects around them.</p>
+          <p>Professionally, I'm a PhD candidate at UNIST in the IRIS Lab. There I apply machine learning and deep
+            learning to <b>satellite Earth observation</b>: atmospheric methane, ammonia and ozone, and
+            precipitation nowcasting. I also experiment with <b>agentic AI</b>.</p>
         </div>
         <div>
           <h4>Interests</h4>
           <ul>
-            <li>Machine learning for Earth observation</li>
-            <li>Spatio-temporal deep learning</li>
-            <li>Multi-source data fusion and bias correction</li>
-            <li>Atmospheric methane and air quality</li>
-            <li>Precipitation nowcasting</li>
-            <li>Agentic AI</li>
             <li>Data science across fields</li>
+            <li>Deep learning: Transformers, state-space models, KAN</li>
+            <li>Spatio-temporal and sequence modelling</li>
+            <li>Tabular ML and explainability</li>
+            <li>Agentic AI</li>
+            <li>AI for Earth observation</li>
           </ul>
         </div>
         <div>
@@ -356,44 +364,39 @@ img{max-width:100%}[hidden]{display:none!important}
   <section id="research" style="padding-top:0">
     <div class="in">
       <div class="sechead">
-        <span class="label">Research</span>
-        <h2>Machine learning for data that is biased, sparse and full of gaps.</h2>
-        <p>Satellites see the atmosphere unevenly: clouds, orbits and sensor biases leave holes and errors. My models correct, combine and complete those observations.</p>
+        <span class="label">What I work on</span>
+        <h2>Machine learning, end to end.</h2>
+        <p>The same skills, applied to different problems.</p>
       </div>
       <div class="bento">
-        <article class="card big">
-          <div style="display:grid;gap:12px">
-            <span class="state">Main line · published + ongoing</span>
-            <h3>Global methane mapping</h3>
-            <p>Bias correction and fusion of several satellite data streams into one consistent global daily XCH₄
-              dataset, and spatio-temporal deep learning that fills the remaining gaps.</p>
-            <div class="tags"><span>gradient boosting</span><span>SHAP</span><span>multi-source fusion</span><span>spatio-temporal DL</span><span>uncertainty</span></div>
-          </div>
-          <div style="display:grid;gap:16px">
-            <div class="mol" aria-hidden="true">CH₄</div>
-            <div class="metric-row">
-              <div><b>0.1°</b><span>daily, global land</span></div>
-              <div><b>0.81</b><span>R², withheld sites</span></div>
-              <div><b>2020–23</b><span>published record</span></div>
-            </div>
-          </div>
-        </article>
         <article class="card half">
-          <span class="state">Ongoing</span>
-          <h3>Precipitation nowcasting</h3>
-          <p>Deep learning that predicts the next frames of satellite and radar image sequences for short-term East Asian rainfall forecasts.</p>
+          <span class="state">Deep learning</span>
+          <h3>Spatio-temporal and sequence models</h3>
+          <p>Models that learn from space and time together: predicting the next frames of an image sequence and filling missing values from context.</p>
           <div class="frames" aria-hidden="true">
             <div style="--x:8;--y:30"></div><div style="--x:22;--y:26"></div><div style="--x:36;--y:22"></div><div class="pred" style="--x:50;--y:18"></div>
           </div>
           <div class="flabel" aria-hidden="true"><span>t−2</span><span>t−1</span><span>t</span><span>t+1 ?</span></div>
-          <div class="tags"><span>sequence prediction</span><span>CNN / Transformer</span><span>early warning</span></div>
+          <div class="tags"><span>Transformers</span><span>Mamba / SSMs</span><span>CNNs</span><span>KAN</span></div>
         </article>
         <article class="card half">
-          <span class="state">Ongoing · co-author</span>
-          <h3>Ammonia and ozone</h3>
-          <p>Deep learning-based estimation of atmospheric NH₃, and related work on ozone.</p>
-          <div class="mol" aria-hidden="true">NH₃ · O₃</div>
-          <div class="tags"><span>deep learning</span><span>air quality</span></div>
+          <span class="state">Applied ML</span>
+          <h3>Scientific and tabular data</h3>
+          <p>Gradient boosting, deep tabular models and explainability on large, noisy real-world datasets, with careful hold-out validation.</p>
+          <div class="mol" aria-hidden="true">f(x) → ŷ</div>
+          <div class="tags"><span>XGBoost</span><span>LightGBM</span><span>TabM</span><span>SHAP</span><span>Optuna</span></div>
+        </article>
+        <article class="card half">
+          <span class="state">Domain</span>
+          <h3>AI for Earth observation</h3>
+          <p>My PhD: satellite data for atmospheric methane, ammonia and ozone, and deep learning for precipitation nowcasting.</p>
+          <div class="tags"><span>CH₄</span><span>NH₃</span><span>O₃</span><span>nowcasting</span></div>
+        </article>
+        <article class="card half">
+          <span class="state">Exploring</span>
+          <h3>Agentic AI and side projects</h3>
+          <p>LLM agent workflows, and small data science projects on datasets from fields outside my own.</p>
+          <div class="tags"><span>LLM agents</span><span>any dataset</span><span>quick builds</span></div>
         </article>
       </div>
     </div>
@@ -402,15 +405,15 @@ img{max-width:100%}[hidden]{display:none!important}
   <section id="approach" style="padding-top:0">
     <div class="in">
       <div class="sechead">
-        <span class="label">Approach</span>
-        <h2>From raw retrievals to a product people can trust.</h2>
+        <span class="label">How I work</span>
+        <h2>From a raw dataset to something people can use.</h2>
       </div>
       <div class="pipe">
-        <div class="step"><b>Collocate</b><span>Match satellite data with ground-truth stations in space and time.</span></div>
-        <div class="step"><b>Correct</b><span>Learn and remove each sensor's systematic bias, with SHAP to check what the model relies on.</span></div>
-        <div class="step"><b>Fuse</b><span>Harmonize sources to one reference and merge them into a single record.</span></div>
-        <div class="step"><b>Fill</b><span>Deep learning on spatial and temporal context fills cloud and orbit gaps.</span></div>
-        <div class="step"><b>Validate</b><span>Hold out whole sites, months and years so scores reflect real generalization.</span></div>
+        <div class="step"><b>Explore</b><span>Understand the data: coverage, gaps, outliers and what the target really is.</span></div>
+        <div class="step"><b>Engineer</b><span>Clean, join and build features, and keep test data untouched.</span></div>
+        <div class="step"><b>Model</b><span>Start with a strong baseline, then try deep models where they earn their cost.</span></div>
+        <div class="step"><b>Validate</b><span>Hold out whole groups, places or periods so scores reflect real generalization.</span></div>
+        <div class="step"><b>Ship</b><span>Code, a clear README, figures and, where it helps, an interactive demo.</span></div>
       </div>
     </div>
   </section>
@@ -423,7 +426,7 @@ img{max-width:100%}[hidden]{display:none!important}
       </div>
       <div class="pubs">
         <article class="pub">
-          <canvas id="thumb1" width="220" height="138" aria-hidden="true"></canvas>
+          <div class="thumb" aria-hidden="true">CH₄</div>
           <div>
             <span class="venue">Atmospheric Measurement Techniques · 2026 · first author</span>
             <h3>Enhanced methane monitoring: a globally harmonized daily 0.1° XCH₄ through machine learning-based fusion of GOSAT, GOSAT-2, and TROPOMI</h3>
@@ -518,7 +521,7 @@ img{max-width:100%}[hidden]{display:none!important}
 <section class="contact" id="contact" style="padding:0">
   <div class="in">
     <span class="label">Contact</span>
-    <h2>Open to collaborations in AI for Earth observation.</h2>
+    <h2>Open to collaborations in data science and AI.</h2>
     <div class="mail">jnkeya@unist.ac.kr</div>
     <footer>© 2026 Jebun Naher Keya · Last updated November 2026</footer>
   </div>
@@ -526,127 +529,99 @@ img{max-width:100%}[hidden]{display:none!important}
 
 <script>
 (() => {
-  const W = 180, H = 90;                      // 2° cells
-  const cv = document.getElementById('field');
-  const ctx = cv.getContext('2d');
-  const off = document.createElement('canvas'); off.width = W; off.height = H;
-  const octx = off.getContext('2d'); const img = octx.createImageData(W, H);
-  const stops = [[49,54,149],[69,117,180],[116,173,209],[171,217,233],[224,243,248],[254,224,144],[253,174,97],[244,109,67],[215,48,39],[165,0,38]];
-  const cmap = v => { v = Math.max(0, Math.min(1, v)) * (stops.length - 1); const i = Math.min(stops.length - 2, Math.floor(v)), f = v - i, a = stops[i], b = stops[i+1]; return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f]; };
+  const cv = document.getElementById('play'), ctx = cv.getContext('2d');
+  const CW = cv.width, CH = cv.height, GX = 96, GY = 60;
+  const epEl = document.getElementById('ep'), lossEl = document.getElementById('loss'), stEl = document.getElementById('pstate');
+  let cls = 0, pts = [], epoch = 0, until = 2500;
 
-  // synthetic field: latitude gradient + a few smooth blobs
-  let truth, blobs;
-  function makeField(seed) {
-    let s = seed; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
-    blobs = Array.from({length: 9}, () => ({x: rnd()*W, y: 15 + rnd()*(H-30), r: 6 + rnd()*14, a: (rnd()-.35)*.9}));
-    truth = new Float32Array(W*H);
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-      let v = .55 - (y/H - .35)*.55;
-      for (const b of blobs) { const dx = Math.min(Math.abs(x-b.x), W-Math.abs(x-b.x)), dy = y-b.y; v += b.a*Math.exp(-(dx*dx+dy*dy)/(2*b.r*b.r)); }
-      truth[y*W+x] = v;
+  // tiny MLP 2-16-16-1
+  const H1 = 16, H2 = 16;
+  const rn = () => (Math.random() * 2 - 1) * .8;
+  let W1, b1, W2, b2, W3, b3;
+  function init() {
+    W1 = Array.from({length: H1}, () => [rn(), rn()]); b1 = Array(H1).fill(0);
+    W2 = Array.from({length: H2}, () => Array.from({length: H1}, () => rn() / 2)); b2 = Array(H2).fill(0);
+    W3 = Array.from({length: H2}, () => rn() / 2); b3 = 0; epoch = 0; until = 2500;
+  }
+  const h1 = new Float64Array(H1), h2 = new Float64Array(H2);
+  function fwd(x, y) {
+    for (let i = 0; i < H1; i++) h1[i] = Math.tanh(W1[i][0] * x + W1[i][1] * y + b1[i]);
+    for (let j = 0; j < H2; j++) { let s = b2[j]; const w = W2[j]; for (let i = 0; i < H1; i++) s += w[i] * h1[i]; h2[j] = Math.tanh(s); }
+    let o = b3; for (let j = 0; j < H2; j++) o += W3[j] * h2[j];
+    return 1 / (1 + Math.exp(-o));
+  }
+  const d2 = new Float64Array(H2), d1 = new Float64Array(H1);
+  function step(lr) {
+    let L = 0;
+    for (let n = pts.length - 1; n > 0; n--) { const k = Math.random() * (n + 1) | 0; [pts[n], pts[k]] = [pts[k], pts[n]]; }
+    for (const p of pts) {
+      const o = fwd(p.x, p.y), g = o - p.c;
+      L += -(p.c * Math.log(o + 1e-9) + (1 - p.c) * Math.log(1 - o + 1e-9));
+      for (let j = 0; j < H2; j++) d2[j] = g * W3[j] * (1 - h2[j] * h2[j]);
+      for (let i = 0; i < H1; i++) { let s = 0; for (let j = 0; j < H2; j++) s += d2[j] * W2[j][i]; d1[i] = s * (1 - h1[i] * h1[i]); }
+      for (let j = 0; j < H2; j++) { W3[j] -= lr * g * h2[j]; b2[j] -= lr * d2[j]; for (let i = 0; i < H1; i++) W2[j][i] -= lr * d2[j] * h1[i]; }
+      b3 -= lr * g;
+      for (let i = 0; i < H1; i++) { W1[i][0] -= lr * d1[i] * p.x; W1[i][1] -= lr * d1[i] * p.y; b1[i] -= lr * d1[i]; }
     }
-  }
-  // clouds: random blobs where satellites see nothing
-  let cloud;
-  function makeClouds(seed) {
-    let s = seed; const rnd = () => (s = (s * 48271) % 2147483647) / 2147483647;
-    cloud = new Uint8Array(W*H);
-    for (let k = 0; k < 26; k++) { const cx = rnd()*W, cy = rnd()*H, r = 3 + rnd()*9;
-      for (let y = Math.max(0,cy-r|0); y < Math.min(H,cy+r+1); y++) for (let x = Math.max(0,cx-r|0); x < Math.min(W,cx+r+1); x++)
-        if ((x-cx)**2 + (y-cy)**2 < r*r) cloud[y*W+x] = 1; }
+    epoch++;
+    return pts.length ? L / pts.length : 0;
   }
 
-  let obs, fill, t, phase, mode = 'ml', seed = 7;
-  const phaseEl = document.getElementById('phase'), covEl = document.getElementById('cov');
-  function reset() { seed = (seed * 31 + 17) % 9973 + 1; makeField(seed); makeClouds(seed + 3); obs = new Uint8Array(W*H); fill = new Float32Array(W*H); t = 0; phase = 0; }
-
-  // swaths: polar-orbit stripes tilted ~12°, advancing westward
-  function scan(step) {
-    const nSw = 4;
-    for (let k = 0; k < nSw; k++) {
-      const x0 = ((step * 2.2 + k * (W / nSw)) % W);
-      for (let y = 0; y < H; y++) {
-        const cx = (x0 + (y - H/2) * .22 + W) % W;
-        for (let d = -3; d <= 3; d++) { const x = (((cx + d) | 0) + W) % W, i = y*W + x; if (!cloud[i]) obs[i] = 1; }
-      }
-    }
+  // datasets in [-1, 1]
+  const g = () => (Math.random() + Math.random() + Math.random() - 1.5) * .12;
+  function make(kind) {
+    pts = [];
+    if (kind === 'moons') for (let k = 0; k < 120; k++) { const t = Math.random() * Math.PI, c = k % 2;
+      const x = c ? 1 - Math.cos(t) : Math.cos(t), y = c ? .5 - Math.sin(t) : Math.sin(t);
+      pts.push({x: (x - .5) * .75 + g(), y: (y - .25) * .9 + g(), c}); }
+    if (kind === 'circles') for (let k = 0; k < 140; k++) { const a = Math.random() * 2 * Math.PI, c = k % 2, r = c ? .25 : .7;
+      pts.push({x: Math.cos(a) * r + g(), y: Math.sin(a) * r * .9 + g(), c}); }
+    if (kind === 'xor') for (let k = 0; k < 140; k++) { const x = Math.random() * 1.8 - .9, y = Math.random() * 1.8 - .9;
+      if (Math.abs(x) < .06 || Math.abs(y) < .06) continue; pts.push({x, y, c: (x * y > 0) ? 1 : 0}); }
+    init();
   }
-  function coverage(arr) { let n = 0; for (let i = 0; i < arr.length; i++) if (arr[i]) n++; return n / arr.length; }
 
-  const bgColor = () => getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim() || '#0f161d';
-  function hexRgb(h) { const m = h.replace('#',''); const n = parseInt(m.length === 3 ? m.split('').map(c=>c+c).join('') : m, 16); return [n>>16&255, n>>8&255, n&255]; }
-
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const rgb = h => { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const off = document.createElement('canvas'); off.width = GX; off.height = GY;
+  const octx = off.getContext('2d'), img = octx.createImageData(GX, GY);
   function draw() {
-    const bg = hexRgb(bgColor());
+    const A = rgb(css('--accent') || '#6fb6e8'), B = rgb(css('--warm') || '#f08a5d'), bg = rgb(css('--bg2') || '#0f161d');
     const d = img.data;
-    for (let i = 0; i < W*H; i++) {
-      let c = bg, a = 1;
-      if (obs[i]) c = cmap(truth[i]);
-      else if (mode === 'ml' && fill[i] > 0) { const m = cmap(truth[i]); const f = Math.min(1, fill[i]); c = [bg[0]+(m[0]-bg[0])*f, bg[1]+(m[1]-bg[1])*f, bg[2]+(m[2]-bg[2])*f]; }
-      d[i*4] = c[0]; d[i*4+1] = c[1]; d[i*4+2] = c[2]; d[i*4+3] = 255;
+    for (let j = 0; j < GY; j++) for (let i = 0; i < GX; i++) {
+      const p = pts.length ? fwd(i / (GX - 1) * 2 - 1, 1 - j / (GY - 1) * 2) : .5;
+      const c = p > .5 ? B : A, s = Math.abs(p - .5) * 2 * .55, k = (j * GX + i) * 4;
+      d[k] = bg[0] + (c[0] - bg[0]) * s; d[k + 1] = bg[1] + (c[1] - bg[1]) * s; d[k + 2] = bg[2] + (c[2] - bg[2]) * s; d[k + 3] = 255;
     }
     octx.putImageData(img, 0, 0);
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(off, 0, 0, cv.width, cv.height);
-    // graticule
-    ctx.strokeStyle = 'rgba(139,154,167,.18)'; ctx.lineWidth = 1;
-    for (let lon = 0; lon <= 360; lon += 60) { const x = lon / 360 * cv.width; ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, cv.height); ctx.stroke(); }
-    for (let lat = 0; lat <= 180; lat += 30) { const y = lat / 180 * cv.height; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cv.width, y); ctx.stroke(); }
-    const cov = mode === 'ml' && phase >= 1 ? Math.min(1, coverage(obs) + (1 - coverage(obs)) * Math.min(1, (t - 60) / 70)) : coverage(obs);
-    covEl.textContent = Math.round(cov * 100) + '%';
-  }
-
-  function tick() {
-    t++;
-    if (phase === 0) { scan(t); if (t >= 60) { phase = 1; phaseEl.textContent = mode === 'ml' ? 'Model filling gaps' : 'Observed only'; } }
-    else if (phase === 1) {
-      if (mode === 'ml') {
-        // diffusion-like growth from observed edges
-        const next = fill.slice();
-        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-          const i = y*W + x; if (obs[i] || fill[i] >= 1) continue;
-          const nb = [i-1, i+1, i-W, i+W].filter(j => j >= 0 && j < W*H);
-          let m = 0; for (const j of nb) m = Math.max(m, obs[j] ? 1 : fill[j]);
-          if (m > .35) next[i] = Math.min(1, fill[i] + .12);
-        }
-        fill = next;
-      }
-      if (t >= 140) { phase = 2; phaseEl.textContent = mode === 'ml' ? 'Seamless map' : 'Gaps remain'; }
-    } else if (t >= 200) { reset(); phaseEl.textContent = 'Satellites scanning'; }
-    draw();
-  }
-
-  function setMode(m) {
-    mode = m;
-    document.getElementById('b-obs').setAttribute('aria-pressed', m === 'obs');
-    document.getElementById('b-ml').setAttribute('aria-pressed', m === 'ml');
-    if (phase > 0) phaseEl.textContent = m === 'ml' ? 'Model filling gaps' : 'Observed only';
-    draw();
-  }
-  document.getElementById('b-obs').addEventListener('click', () => setMode('obs'));
-  document.getElementById('b-ml').addEventListener('click', () => setMode('ml'));
-
-  reset();
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { for (let k = 0; k < 60; k++) scan(k); for (let i = 0; i < W*H; i++) fill[i] = 1; t = 150; phase = 2; phaseEl.textContent = 'Seamless map'; draw(); }
-  else { for (let k = 0; k < 30; k++) { scan(k); } t = 30; draw(); setInterval(tick, 50); }
-
-  // publication thumbnail: three noisy sources -> one fused field
-  const tc = document.getElementById('thumb1');
-  if (tc) {
-    const c2 = tc.getContext('2d'), tw = tc.width, th = tc.height;
-    c2.fillStyle = bgColor(); c2.fillRect(0, 0, tw, th);
-    const cell = 6, cols = Math.floor(tw / cell), rows = Math.floor(th / cell);
-    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
-      const gx = Math.floor(x / cols * W), gy = Math.floor(y / rows * H);
-      const left = x < cols * .42;
-      if (left && ((x * 7 + y * 13) % 5 > 1)) continue;          // sparse inputs on the left
-      const [r, g, b] = cmap(truth[gy*W + gx]);
-      c2.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
-      c2.fillRect(x * cell, y * cell, cell - 1, cell - 1);
+    ctx.imageSmoothingEnabled = true; ctx.drawImage(off, 0, 0, CW, CH);
+    for (const p of pts) {
+      const X = (p.x + 1) / 2 * CW, Y = (1 - p.y) / 2 * CH, c = p.c ? B : A;
+      ctx.beginPath(); ctx.arc(X, Y, 4.5, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgb(${c})`; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = `rgb(${bg})`; ctx.stroke();
     }
-    c2.fillStyle = 'rgba(0,0,0,.35)'; c2.fillRect(cols * .42 * cell - 1, 0, 2, th);
   }
+
+  let lastLoss = 0;
+  function train(n) { for (let k = 0; k < n; k++) lastLoss = step(.03); epEl.textContent = epoch; lossEl.textContent = pts.length ? lastLoss.toFixed(3) : '–'; stEl.textContent = !pts.length ? 'Add some points' : lastLoss < .08 ? 'Converged' : 'Neural network training'; }
+
+  cv.addEventListener('click', e => {
+    const r = cv.getBoundingClientRect();
+    pts.push({x: (e.clientX - r.left) / r.width * 2 - 1, y: 1 - (e.clientY - r.top) / r.height * 2, c: cls}); until = epoch + 1500;
+    if (reduce) { train(300); draw(); }
+  });
+  const setCls = c => { cls = c; document.getElementById('cA').setAttribute('aria-pressed', c === 0); document.getElementById('cB').setAttribute('aria-pressed', c === 1); };
+  document.getElementById('cA').addEventListener('click', () => setCls(0));
+  document.getElementById('cB').addEventListener('click', () => setCls(1));
+  document.querySelectorAll('[data-ds]').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.ds === 'clear') { pts = []; init(); } else make(b.dataset.ds);
+    if (reduce) train(400); draw();
+  }));
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  make('moons');
+  if (reduce) { train(400); draw(); }
+  else { train(1); draw(); setInterval(() => { if (pts.length && epoch < until) { train(2); draw(); } }, 40); }
 })();
 </script>
 <script>
