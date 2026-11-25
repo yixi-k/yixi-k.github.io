@@ -90,6 +90,7 @@ nav.top ul a:hover { color: var(--fg); }
 .chip { font: 500 .7rem var(--font-mono); background: var(--bg2); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
 .chip:hover { color: var(--fg); border-color: var(--accent); }
 #cA::first-letter { color: var(--accent); } #cB::first-letter { color: var(--warm); }
+.toggle button[aria-pressed="true"]::first-letter { color: var(--bg); }
 canvas#play { width: 100%; height: auto; aspect-ratio: 8 / 5; display: block; border-radius: 8px; background: var(--bg2); cursor: crosshair; touch-action: manipulation; }
 
 .pipe.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -587,7 +588,7 @@ img{max-width:100%}[hidden]{display:none!important}
   }
 
   let lastLoss = 0;
-  function train(n) { for (let k = 0; k < n; k++) lastLoss = step(.03); epEl.textContent = epoch; lossEl.textContent = pts.length ? lastLoss.toFixed(3) : '–'; stEl.textContent = !pts.length ? 'Add some points' : lastLoss < .08 ? 'Converged' : 'Neural network training'; }
+  function train(n) { if (pts.length) for (let k = 0; k < n; k++) lastLoss = step(.03); epEl.textContent = epoch; lossEl.textContent = pts.length ? lastLoss.toFixed(3) : '–'; stEl.textContent = !pts.length ? 'Add some points' : lastLoss < .08 ? 'Converged' : 'Neural network training'; }
 
   cv.addEventListener('click', e => {
     const r = cv.getBoundingClientRect();
