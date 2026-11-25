@@ -130,10 +130,23 @@ details.more dd { margin: 2px 0 0; color: var(--muted); }
 .talk h3 { font-size: 1.02rem; margin: 0; }
 .talk .meta { font-size: .86rem; color: var(--muted); margin: 2px 0 0; }
 
+/* talk logos */
+.talk { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 18px; align-items: center; }
+.logo { width: 96px; height: 54px; border-radius: 6px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; padding: 6px 8px; }
+.logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.logo.txt { font: 700 .8rem var(--font-head); color: #1565c0; letter-spacing: .02em; }
+@media (max-width: 520px) { .talk { grid-template-columns: 64px minmax(0, 1fr); gap: 12px; } .logo { width: 64px; height: 40px; } }
+.pic figcaption { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+.pic { margin: 0; }
+
 /* skills */
-.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.skills { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
 .skills h3 { font-size: 1.02rem; margin: 0 0 8px; }
-.skills p { margin: 0; color: var(--muted); font-size: .92rem; }
+.tools { display: flex; flex-wrap: wrap; gap: 10px; }
+.tool { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 8px; background: #fff; border: 1px solid var(--line); font: 500 .85rem var(--font-head); color: #212529; }
+.tool img { height: 24px; width: auto; }
+.tool.wide img { height: 22px; max-width: 110px; }
+.tool.text { background: var(--bg); color: var(--fg); }
 @media (max-width: 760px) { .skills { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 
 .contact p { margin: 0 0 8px; }
@@ -232,7 +245,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: .85rem; text-
     <div class="wrap sec">
       <h2>Publications</h2>
       <div class="list">
-        <div class="item">
+        <div class="item has-img">
           <div>
             <h3>Enhanced methane monitoring: a globally harmonized daily 0.1° XCH₄ through machine learning-based fusion of GOSAT, GOSAT-2, and TROPOMI</h3>
             <p class="authors"><span class="me">Jebun Naher Keya</span>, Yejin Kim, Hyunyoung Choi, Jungho Im</p>
@@ -253,6 +266,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: .85rem; text-
   doi     = {10.5194/amt-19-4313-2026}
 }</pre>
           </div>
+          <figure class="pic"><a href="https://doi.org/10.5194/amt-19-4313-2026"><img src="assets/img/amt2026_fig3.jpg" alt="Workflow figure: machine learning bias correction, inter-sensor harmonization and multi-sensor fusion" loading="lazy"></a><figcaption>Fig. 3, Keya et al. (2026), CC BY 4.0</figcaption></figure>
         </div>
         <div class="item">
           <div>
@@ -283,11 +297,13 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: .85rem; text-
     <div class="wrap sec">
       <h2>Talks</h2>
       <div>
-        <div class="talk"><h3>Enhanced methane monitoring: a globally harmonized daily 0.1° XCH₄ dataset through machine-learning-based fusion</h3><p class="meta">Invited oral · SPIE Asia-Pacific Remote Sensing 2026 · Nov 12, 2026 · Yokohama, Japan</p></div>
-        <div class="talk"><h3>Enhanced global XCH₄ mapping through machine learning and multi-sensor data fusion</h3><p class="meta">Poster (accepted) · AGU Fall Meeting 2025 · Dec 2025 · New Orleans, USA</p></div>
-        <div class="talk"><h3>Improving global methane monitoring: machine learning-based bias correction of multi-satellite XCH₄ retrievals</h3><p class="meta">Oral · KAGIS Fall Conference &amp; IAG'i Symposium, and GeoAI Data Conference · Nov 2025 · Jeju, Korea</p></div>
-        <div class="talk"><h3>Integration of multi-satellite methane (XCH₄) retrievals using machine learning-based bias correction</h3><p class="meta">Oral · KSRS Fall Conference 2025 · Oct 2025 · Yeosu, Korea</p></div>
-        <div class="talk"><h3>Machine learning-based bias correction of global methane from GOSAT, GOSAT-2 and Sentinel-5P</h3><p class="meta">Oral · ISRS 2025 · May 2025 · Incheon, Korea</p></div>
+        <div class="talk"><span class="logo"><img src="assets/logos/spie.svg" alt="SPIE" loading="lazy"></span><div><h3>Enhanced methane monitoring: a globally harmonized daily 0.1° XCH₄ dataset through machine-learning-based fusion</h3><p class="meta">Invited oral · SPIE Asia-Pacific Remote Sensing 2026 · Nov 12, 2026 · Yokohama, Japan</p></div></div>
+        <div class="talk"><span class="logo"><img src="assets/logos/icml.svg" alt="ICML" loading="lazy"></span><div><h3>International Conference on Machine Learning (ICML 2026)</h3><p class="meta">Attended · Jul 2026 · Seoul, Korea</p></div></div>
+        <div class="talk"><span class="logo"><img src="assets/logos/agu.svg" alt="AGU" loading="lazy"></span><div><h3>Enhanced global XCH₄ mapping through machine learning and multi-sensor data fusion</h3><p class="meta">Poster (accepted) · AGU Fall Meeting 2025 · Dec 2025 · New Orleans, USA</p></div></div>
+        <div class="talk"><span class="logo txt">KAGIS</span><div><h3>Improving global methane monitoring: machine learning-based bias correction of multi-satellite XCH₄ retrievals</h3><p class="meta">Oral · KAGIS Fall Conference &amp; IAG'i International Symposium · Nov 2025 · Jeju, Korea</p></div></div>
+        <div class="talk"><span class="logo txt">GeoAI</span><div><h3>Improving global methane monitoring: machine learning-based bias correction of multi-satellite XCH₄ retrievals</h3><p class="meta">Oral · GeoAI Data Conference 2025 · Nov 2025 · Jeju, Korea</p></div></div>
+        <div class="talk"><span class="logo"><img src="assets/logos/ksrs.png" alt="Korean Society of Remote Sensing" loading="lazy"></span><div><h3>Integration of multi-satellite methane (XCH₄) retrievals using machine learning-based bias correction</h3><p class="meta">Oral · KSRS Fall Conference 2025 · Oct 2025 · Yeosu, Korea</p></div></div>
+        <div class="talk"><span class="logo txt">ISRS</span><div><h3>Machine learning-based bias correction of global methane from GOSAT, GOSAT-2 and Sentinel-5P</h3><p class="meta">Oral · ISRS 2025 · May 2025 · Incheon, Korea</p></div></div>
       </div>
     </div>
   </section>
@@ -296,9 +312,9 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: .85rem; text-
     <div class="wrap sec">
       <h2>Skills</h2>
       <div class="skills">
-        <div><h3>Machine &amp; Deep Learning</h3><p>PyTorch, XGBoost, LightGBM, Random Forest, CNNs, Transformers, Mamba / state-space models, KAN, TabM</p></div>
-        <div><h3>Data Science</h3><p>Python, EDA, statistics, feature engineering, SHAP, Optuna, Matplotlib</p></div>
-        <div><h3>Applied AI &amp; Computing</h3><p>LLM agents, foundation models, Linux, GPU / CUDA, NetCDF / HDF5, Git, LaTeX</p></div>
+        <div><h3>Machine &amp; Deep Learning</h3><div class="tools"><span class="tool"><img src="assets/icons/pytorch-original.svg" alt="" loading="lazy"><span>PyTorch</span></span><span class="tool wide"><img src="assets/icons/xgboost.png" alt="XGBoost" loading="lazy"></span><span class="tool wide"><img src="assets/icons/lightgbm.svg" alt="LightGBM" loading="lazy"></span><span class="tool wide"><img src="assets/icons/optuna.png" alt="Optuna" loading="lazy"></span><span class="tool text"><span>SHAP</span></span><span class="tool text"><span>Random Forest</span></span><span class="tool text"><span>TabM</span></span><span class="tool text"><span>CNNs</span></span><span class="tool text"><span>Transformers</span></span><span class="tool text"><span>Mamba / SSMs</span></span><span class="tool text"><span>KAN</span></span></div></div>
+        <div><h3>Data Science &amp; Visualization</h3><div class="tools"><span class="tool"><img src="assets/icons/python-original.svg" alt="" loading="lazy"><span>Python</span></span><span class="tool"><img src="assets/icons/matplotlib-original.svg" alt="" loading="lazy"><span>Matplotlib</span></span><span class="tool"><img src="assets/icons/arcgis.svg" alt="" loading="lazy"><span>ArcGIS Pro</span></span><span class="tool text"><span>NetCDF</span></span><span class="tool text"><span>HDF5</span></span><span class="tool text"><span>Panoply</span></span></div></div>
+        <div><h3>Computing &amp; Tools</h3><div class="tools"><span class="tool"><img src="assets/icons/linux-original.svg" alt="" loading="lazy"><span>Linux</span></span><span class="tool"><img src="assets/icons/nvidia.svg" alt="" loading="lazy"><span>GPU / CUDA</span></span><span class="tool"><img src="assets/icons/git-original.svg" alt="" loading="lazy"><span>Git</span></span><span class="tool"><img src="assets/icons/latex-original.svg" alt="" loading="lazy"><span>LaTeX</span></span><span class="tool text"><span>LLM agents</span></span><span class="tool text"><span>Foundation models</span></span></div></div>
       </div>
     </div>
   </section>

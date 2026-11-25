@@ -23,7 +23,7 @@ window.PROJECTS = [
     category: "research",
     status: "Completed",
     featured: true,
-    visual: "research",
+    image: "assets/img/amt2026_fig3.jpg",
     summary: "Machine learning and deep learning on millions of multi-source measurements: correcting systematic errors, merging data sources and filling missing values, validated on held-out locations and periods.",
     tags: ["Large-scale data", "Data integration", "XGBoost", "Spatio-temporal DL", "Validation"],
     problem: "Satellite measurements of an atmospheric gas carry systematic errors and leave large gaps where clouds or orbits block the view. Downstream models that estimate emissions need data that is both accurate and complete.",
