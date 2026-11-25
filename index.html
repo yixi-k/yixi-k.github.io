@@ -3,29 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta property="og:title" content="Jebun Naher Keya">
-<meta property="og:description" content="Data scientist and AI researcher: machine learning and deep learning across fields.">
+<title>Jebun Naher Keya</title>
+<meta name="description" content="Jebun Naher Keya — data scientist and AI/ML practitioner. Data science, machine learning, deep learning and applied AI, with PhD research experience at UNIST.">
+<meta property="og:title" content="Jebun Naher Keya — Data Science, Machine Learning, Applied AI">
+<meta property="og:description" content="Data scientist and AI/ML practitioner building intelligent systems across domains.">
 <meta property="og:url" content="https://yixi-k.github.io/">
 <link rel="canonical" href="https://yixi-k.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22%236fb6e8%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%225%22 fill=%22%23f08a5d%22/%3E%3C/svg%3E">
-<title>Jebun Naher Keya</title>
-<meta name="description" content="Jebun Naher Keya — data scientist and AI researcher. Machine learning and deep learning across fields, with a PhD in AI for Earth observation at UNIST.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230b1016%22/%3E%3Ccircle cx=%2210%22 cy=%2222%22 r=%223%22 fill=%22%237aa7ff%22/%3E%3Ccircle cx=%2216%22 cy=%2212%22 r=%223%22 fill=%22%2346d6b0%22/%3E%3Ccircle cx=%2223%22 cy=%2219%22 r=%223%22 fill=%22%23ffb454%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: dark-first "mission control" page. Full-bleed hero with a live gap-filling simulation,
-   then a stats strip, research panels, a pipeline, publications, projects, a talks timeline and contact. */
+/* Layout: dark-first technical portfolio. Hero (headline + live NN demo) → highlights → featured projects →
+   three capability areas (Data Science / ML & DL / Applied AI), each with its project cards → PhD research →
+   publications → skills → education & talks → contact. Projects are rendered from assets/projects.js. */
 :root {
-  --bg: #0a0f14;
-  --bg2: #0f161d;
-  --surface: #131c24;
-  --fg: #e6edf2;
-  --muted: #8b9aa7;
-  --line: #223039;
-  --accent: #6fb6e8;
-  --warm: #f08a5d;
-  --glow: rgba(111, 182, 232, .14);
+  --bg: #0b1016;
+  --bg2: #10171f;
+  --surface: #141c25;
+  --fg: #e7edf3;
+  --muted: #8e9cab;
+  --line: #232f3b;
+  --accent: #7aa7ff;      /* data / primary */
+  --mint: #46d6b0;        /* ML */
+  --amber: #ffb454;       /* applied AI */
+  --warm: #ff7d6b;        /* class B / highlights */
+  --glow: rgba(122, 167, 255, .13);
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -33,227 +36,214 @@
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --bg: #f3f6f8; --bg2: #e9eef2; --surface: #ffffff; --fg: #111a22; --muted: #566573;
-    --line: #d5dde3; --accent: #1b5f8f; --warm: #c24e24; --glow: rgba(27, 95, 143, .08); color-scheme: light;
+    --bg: #f4f6f9; --bg2: #eaeef3; --surface: #ffffff; --fg: #0f1720; --muted: #566472; --line: #d6dde5;
+    --accent: #2d5fd3; --mint: #128a6d; --amber: #b36a00; --warm: #d2452f; --glow: rgba(45, 95, 211, .07); color-scheme: light;
   }
 }
 :root[data-theme="light"] {
-  --bg: #f3f6f8; --bg2: #e9eef2; --surface: #ffffff; --fg: #111a22; --muted: #566573;
-  --line: #d5dde3; --accent: #1b5f8f; --warm: #c24e24; --glow: rgba(27, 95, 143, .08); color-scheme: light;
+  --bg: #f4f6f9; --bg2: #eaeef3; --surface: #ffffff; --fg: #0f1720; --muted: #566472; --line: #d6dde5;
+  --accent: #2d5fd3; --mint: #128a6d; --amber: #b36a00; --warm: #d2452f; --glow: rgba(45, 95, 211, .07); color-scheme: light;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--fg); font: 400 1rem/1.65 var(--font-body); margin: 0; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+img { max-width: 100%; } [hidden] { display: none !important; }
 a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-a:hover { color: var(--warm); }
-:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; border-radius: 4px; }
-.in {
-  max-width: 1120px; margin: 0 auto;
-  padding-left: max(20px, env(safe-area-inset-left, 0px));
-  padding-right: max(20px, env(safe-area-inset-right, 0px));
-}
+a:hover { color: var(--mint); }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+.in { max-width: 1160px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
 
 /* nav */
-nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-nav.top .in { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; }
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav.top .in { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 13px; }
 .mark { font: 800 1rem var(--font-display); color: var(--fg); text-decoration: none; letter-spacing: -.01em; }
-.mark span { color: var(--accent); }
-nav.top ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 22px; }
+.mark span { color: var(--mint); }
+nav.top ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
 nav.top ul a { font: 500 .8rem var(--font-body); color: var(--muted); text-decoration: none; }
 nav.top ul a:hover { color: var(--fg); }
-@media (max-width: 720px) { nav.top ul { display: none; } }
-
-.navr { display: flex; align-items: center; gap: 22px; }
 .theme-btn { font: 500 .72rem var(--font-mono); background: var(--surface); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; cursor: pointer; }
 .theme-btn:hover { color: var(--fg); border-color: var(--accent); }
-
-/* profile row */
-.profile { display: flex; align-items: center; gap: 16px; margin: 0 0 22px; }
-.avatar { width: 72px; height: 72px; flex: none; border-radius: 50%; display: grid; place-items: center; font: 700 1.4rem var(--font-display); color: var(--fg); background: conic-gradient(from 200deg, #4575b4, #74add1, #fee090, #f46d43, #4575b4); padding: 3px; }
-.avatar span, .avatar img { width: 100%; height: 100%; border-radius: 50%; background: var(--surface); display: grid; place-items: center; object-fit: cover; }
-.profile .who { margin: 0; }
-.profile .where { margin: 0; }
-
-/* about */
-.about { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
-.about p { margin: 0 0 14px; color: var(--muted); max-width: 60ch; }
-.about p b { color: var(--fg); font-weight: 500; }
-.about h4 { margin: 0 0 12px; font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-.about ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: .93rem; }
-.about ul li { padding-left: 16px; position: relative; }
-.about ul li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-.about .yr { display: block; font: 400 .74rem var(--font-mono); color: var(--muted); }
-@media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
-
-.pctl { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font: 500 .7rem var(--font-mono); background: var(--bg2); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
-.chip:hover { color: var(--fg); border-color: var(--accent); }
-#cA::first-letter { color: var(--accent); } #cB::first-letter { color: var(--warm); }
-.toggle button[aria-pressed="true"]::first-letter { color: var(--bg); }
-canvas#play { width: 100%; height: auto; aspect-ratio: 8 / 5; display: block; border-radius: 8px; background: var(--bg2); cursor: crosshair; touch-action: manipulation; }
-
-.pipe.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.step span a { white-space: nowrap; }
-.also { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
-.pill2 { font: 500 .82rem var(--font-body); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
-.projects { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-@media (max-width: 1000px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media (max-width: 560px) { .projects { grid-template-columns: minmax(0, 1fr) !important; } }
-
-/* cite */
-.bib { margin: 12px 0 0; background: var(--bg2); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font: 400 .74rem/1.55 var(--font-mono); color: var(--fg); overflow-x: auto; white-space: pre; }
-.copied { font: 500 .72rem var(--font-mono); color: var(--accent); align-self: center; }
+@media (max-width: 860px) { nav.top ul { display: none; } }
 
 /* hero */
-.hero {
-  position: relative; overflow: hidden;
-  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
-  padding-top: calc(env(safe-area-inset-top, 0px) + 56px); padding-bottom: 56px;
-  background:
-    radial-gradient(60% 80% at 85% 10%, var(--glow), transparent 70%),
-    radial-gradient(40% 60% at 0% 100%, var(--glow), transparent 70%), var(--bg);
-}
-.hero .in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; align-items: center; }
-.kicker { font: 500 .72rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; }
-.kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--warm); box-shadow: 0 0 0 4px color-mix(in srgb, var(--warm) 25%, transparent); }
-.hero h1 { font: 800 clamp(2.5rem, 6.4vw, 4.6rem)/.95 var(--font-display); letter-spacing: -.03em; margin: 18px 0 18px; text-wrap: balance; }
-.hero h1 em { font-style: normal; background: linear-gradient(90deg, #4575b4, #74add1, #fee090, #f46d43, #d73027); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero .who { font: 500 1.05rem/1.5 var(--font-body); color: var(--fg); margin: 0 0 6px; }
-.hero .where { color: var(--muted); margin: 0 0 22px; font-size: .95rem; }
-.hero .bio { color: var(--muted); max-width: 56ch; margin: 0 0 24px; }
-.hero .bio b { color: var(--fg); font-weight: 500; }
+.hero { position: relative; overflow: hidden; margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(env(safe-area-inset-top, 0px) + 60px); padding-bottom: 60px;
+  background: radial-gradient(55% 70% at 88% 8%, var(--glow), transparent 70%), radial-gradient(35% 50% at 0% 100%, rgba(70, 214, 176, .07), transparent 70%), var(--bg); }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 44px 44px;
+  mask-image: radial-gradient(70% 70% at 30% 40%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(70% 70% at 30% 40%, #000 0%, transparent 75%); }
+.hero .in { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 52px; align-items: center; }
+.kicker { display: flex; flex-wrap: wrap; gap: 8px; }
+.kicker span { font: 500 .7rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; padding: 6px 9px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
+.kicker .k1 { color: var(--accent); } .kicker .k2 { color: var(--mint); } .kicker .k3 { color: var(--amber); }
+.hero h1 { font: 800 clamp(2.6rem, 6.6vw, 4.9rem)/.94 var(--font-display); letter-spacing: -.035em; margin: 22px 0 22px; text-wrap: balance; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--mint) 55%, var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.profile { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.avatar { width: 60px; height: 60px; flex: none; border-radius: 50%; padding: 2px; background: conic-gradient(from 210deg, var(--accent), var(--mint), var(--amber), var(--accent)); }
+.avatar span, .avatar img { width: 100%; height: 100%; border-radius: 50%; background: var(--surface); display: grid; place-items: center; object-fit: cover; font: 700 1.1rem var(--font-display); }
+.who { margin: 0; font-weight: 600; }
+.where { margin: 0; color: var(--muted); font-size: .9rem; }
+.bio { color: var(--muted); max-width: 58ch; margin: 0 0 26px; font-size: 1.04rem; }
+.bio b { color: var(--fg); font-weight: 500; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; font: 500 .85rem var(--font-body); padding: 9px 16px; border-radius: 8px; text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: var(--surface); transition: border-color .2s, transform .2s; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 500 .85rem var(--font-body); padding: 9px 16px; border-radius: 8px; text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: var(--surface); cursor: pointer; transition: border-color .2s, transform .2s; }
 .btn:hover { border-color: var(--accent); color: var(--fg); transform: translateY(-1px); }
-.btn.solid { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.btn.solid { background: var(--fg); border-color: var(--fg); color: var(--bg); font-weight: 600; }
 .btn.solid:hover { color: var(--bg); }
 .btn.small { font-size: .76rem; padding: 6px 11px; }
 .btn[aria-disabled="true"] { color: var(--muted); border-style: dashed; pointer-events: none; }
-.iconrow { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; font: 500 .8rem var(--font-mono); }
+.iconrow { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; font: 500 .78rem var(--font-mono); }
 .iconrow a { color: var(--muted); text-decoration: none; }
 .iconrow a:hover { color: var(--accent); }
+@media (max-width: 920px) { .hero .in { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
 
-/* simulation panel */
-.sim { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; box-shadow: 0 30px 80px -40px rgba(0,0,0,.6); min-width: 0; }
+/* cover banner */
+.cover { position: relative; z-index: 1; margin: -60px 0 36px; }
+.cover img { display: block; width: 100%; max-height: 72vh; object-fit: cover; }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--bg)); pointer-events: none; }
+
+/* demo panel */
+.sim { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; box-shadow: 0 30px 80px -40px rgba(0,0,0,.55); min-width: 0; }
 .simhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font: 500 .72rem var(--font-mono); color: var(--muted); }
-.live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
+.live { display: inline-flex; align-items: center; gap: 6px; color: var(--mint); }
 .live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.6s infinite; }
 @keyframes pulse { 50% { opacity: .25; } }
 .toggle { display: inline-flex; background: var(--bg2); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .toggle button { font: 500 .72rem var(--font-mono); border: 0; background: transparent; color: var(--muted); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
-.toggle button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
-canvas#play { cursor: crosshair; }
-canvas#field { width: 100%; height: auto; aspect-ratio: 2 / 1; display: block; border-radius: 8px; background: var(--bg2); image-rendering: pixelated; }
-.simfoot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; font: 400 .7rem var(--font-mono); color: var(--muted); }
-.bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#fee090,#fdae61,#f46d43,#d73027,#a50026); }
+.toggle button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+#cA::first-letter { color: var(--accent); } #cB::first-letter { color: var(--warm); }
+canvas#play { width: 100%; height: auto; aspect-ratio: 8 / 5; display: block; border-radius: 8px; background: var(--bg2); cursor: crosshair; touch-action: manipulation; }
+.simfoot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font: 400 .72rem var(--font-mono); color: var(--muted); }
+.pctl { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 .7rem var(--font-mono); background: var(--bg2); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.chip:hover { color: var(--fg); border-color: var(--accent); }
 .readout { font-variant-numeric: tabular-nums; color: var(--fg); }
-.note { font: 400 .68rem var(--font-mono); color: var(--muted); opacity: .8; }
+.note { font: 400 .68rem var(--font-mono); color: var(--muted); }
 
-@media (max-width: 900px) { .hero .in { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
-
-/* stats */
-.stats { border-block: 1px solid var(--line); background: var(--bg2); }
-.stats .in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.stat { padding-block: 22px; padding-inline: 4px 16px; display: grid; gap: 2px; }
-.stat + .stat { border-left: 1px solid var(--line); padding-left: 20px; }
-.stat b { font: 700 1.9rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
-.stat b small { font-size: .9rem; color: var(--muted); font-weight: 500; }
-.stat span { font-size: .8rem; color: var(--muted); }
-@media (max-width: 720px) { .stats .in { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat:nth-child(3) { border-left: 0; padding-left: 4px; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
+/* highlights */
+.highlights { border-block: 1px solid var(--line); background: var(--bg2); }
+.highlights .in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.hl { padding: 22px 18px 22px 0; display: grid; gap: 4px; align-content: start; }
+.hl + .hl { border-left: 1px solid var(--line); padding-left: 20px; }
+.hl b { font: 700 1.55rem/1.05 var(--font-display); font-variant-numeric: tabular-nums; }
+.hl span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 760px) { .highlights .in { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hl:nth-child(3) { border-left: 0; padding-left: 0; } .hl:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
 /* sections */
-section { padding-block: 84px; scroll-margin-top: 60px; }
-.sechead { display: grid; gap: 10px; margin-bottom: 36px; max-width: 720px; }
+section { padding-block: 84px 0; scroll-margin-top: 60px; }
+.sechead { display: grid; gap: 10px; margin-bottom: 30px; max-width: 760px; }
 .label { font: 500 .72rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
 h2 { font: 700 clamp(1.8rem, 3.6vw, 2.6rem)/1.05 var(--font-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
-.sechead p { color: var(--muted); margin: 0; max-width: 60ch; }
-h3 { font: 700 1.25rem/1.2 var(--font-display); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.sechead p { color: var(--muted); margin: 0; max-width: 62ch; }
+h3 { font: 700 1.15rem/1.2 var(--font-display); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
 
-/* research bento */
-.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; position: relative; overflow: hidden; transition: border-color .25s; }
-.card:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
-.card.big { grid-column: span 6; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: center; }
-.card.half { grid-column: span 3; }
-.card p { color: var(--muted); margin: 0; font-size: .95rem; }
-.state { font: 500 .66rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--warm); }
+/* project cards */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.grid.feat { grid-template-columns: 1.4fr 1fr 1fr; }
+@media (max-width: 960px) { .grid, .grid.feat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid, .grid.feat { grid-template-columns: minmax(0, 1fr); } }
+.card { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-rows: auto 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; min-width: 0; transition: border-color .2s, transform .2s; }
+.card:hover { border-color: color-mix(in srgb, var(--cat) 70%, var(--line)); transform: translateY(-2px); }
+.card:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.thumb { aspect-ratio: 16 / 9; background: var(--bg2); border-bottom: 1px solid var(--line); display: block; width: 100%; max-width: 100%; position: relative; }
+.thumb svg, .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card .body { padding: 16px 18px 18px; display: grid; gap: 9px; align-content: start; }
+.meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.cat { font: 500 .66rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cat); }
+.status { font: 500 .64rem/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.status.done { color: var(--mint); border-color: color-mix(in srgb, var(--mint) 50%, var(--line)); }
+.status.live { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 50%, var(--line)); }
+.card p { margin: 0; color: var(--muted); font-size: .9rem; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tags span { font: 400 .7rem/1 var(--font-mono); padding: 5px 8px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); }
-.frames { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-.frames div { aspect-ratio: 1; border-radius: 6px; background: var(--bg2); border: 1px solid var(--line); position: relative; overflow: hidden; }
-.frames div::after { content: ""; position: absolute; width: 55%; height: 55%; border-radius: 50%; filter: blur(6px); background: radial-gradient(circle, #f46d43, #fee090 45%, #74add1 75%, transparent 76%); left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); }
-.frames div.pred { border-color: var(--accent); border-style: dashed; }
-.frames + .flabel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font: 400 .66rem var(--font-mono); color: var(--muted); text-align: center; }
-.mol { font: 700 3.2rem/1 var(--font-display); color: color-mix(in srgb, var(--fg) 14%, transparent); letter-spacing: -.02em; }
-.metric-row { display: flex; gap: 26px; flex-wrap: wrap; }
-.metric-row div { display: grid; }
-.metric-row b { font: 700 1.6rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
-.metric-row span { font: 400 .7rem var(--font-mono); color: var(--muted); }
-@media (max-width: 820px) { .card.big { grid-template-columns: minmax(0, 1fr); } .card.half { grid-column: span 6; } }
+.tags span { font: 400 .68rem/1 var(--font-mono); padding: 5px 7px; border-radius: 5px; background: var(--bg2); color: var(--muted); }
+.more { font: 500 .74rem var(--font-mono); color: var(--fg); }
+[data-cat="data-science"] { --cat: var(--accent); }
+[data-cat="ml-dl"] { --cat: var(--mint); }
+[data-cat="applied-ai"] { --cat: var(--amber); }
+[data-cat="research"] { --cat: var(--warm); }
 
-/* pipeline */
-.pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; counter-reset: step; }
-.step { padding: 22px 18px 22px 0; border-top: 2px solid var(--line); position: relative; display: grid; gap: 8px; align-content: start; }
-.step::before { counter-increment: step; content: "0" counter(step); font: 500 .72rem var(--font-mono); color: var(--accent); }
-.step::after { content: ""; position: absolute; top: -6px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
-.step b { font: 700 1.02rem var(--font-display); }
-.step span { font-size: .86rem; color: var(--muted); }
-@media (max-width: 820px) { .pipe, .pipe.four { grid-template-columns: minmax(0, 1fr); } .step { border-top: 0; border-left: 2px solid var(--line); padding: 4px 0 22px 22px; } .step::after { top: 4px; left: -6px; } }
+/* capability areas */
+.area { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 36px; padding-block: 36px; border-top: 1px solid var(--line); }
+.area:first-of-type { border-top: 0; padding-top: 0; }
+.area aside { display: grid; gap: 12px; align-content: start; position: sticky; top: 80px; }
+.area aside .num { font: 500 .72rem var(--font-mono); color: var(--cat); letter-spacing: .1em; text-transform: uppercase; }
+.area aside h3 { font-size: 1.6rem; }
+.area aside ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .88rem; color: var(--muted); }
+.area aside li::before { content: "→ "; color: var(--cat); font-family: var(--font-mono); }
+.area .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 900px) { .area { grid-template-columns: minmax(0, 1fr); gap: 20px; } .area aside { position: static; } }
+@media (max-width: 600px) { .area .grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* PhD research */
+.phd { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+.phd dl { margin: 0; display: grid; gap: 14px; }
+.phd dt { font: 500 .7rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--warm); }
+.phd dd { margin: 2px 0 0; color: var(--muted); font-size: .93rem; }
+.phd dd b { color: var(--fg); font-weight: 500; }
+.skillgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.skillgrid span { font-size: .86rem; padding: 10px 12px; border-radius: 8px; background: var(--bg2); border: 1px solid var(--line); }
+.bigstat { display: flex; gap: 28px; flex-wrap: wrap; }
+.bigstat div { display: grid; }
+.bigstat b { font: 700 1.9rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.bigstat span { font: 400 .72rem var(--font-mono); color: var(--muted); }
+@media (max-width: 860px) { .phd { grid-template-columns: minmax(0, 1fr); padding: 20px; } }
 
 /* publications */
-.pubs { display: grid; gap: 18px; }
-.pub { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; align-items: start; }
-.pub canvas, .pub .thumb { width: 100%; aspect-ratio: 16 / 10; border-radius: 8px; background: var(--bg2); display: block; max-width: 100%; }
-.pub .thumb { display: grid; place-items: center; font: 700 1.4rem var(--font-display); color: var(--muted); border: 1px solid var(--line); }
-.venue { font: 500 .72rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--warm); }
-.pub h3 { font-size: 1.15rem; margin: 8px 0 6px; }
-.authors { font-size: .88rem; color: var(--muted); margin: 0; }
+.pubs { display: grid; gap: 14px; }
+.pub { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-top: 1px solid var(--line); }
+.pub .yr { font: 500 .8rem var(--font-mono); color: var(--muted); }
+.pub h3 { font-size: 1.05rem; margin: 0 0 4px; }
+.authors { font-size: .86rem; color: var(--muted); margin: 0; }
 .me { color: var(--fg); font-weight: 600; }
-.tldr { margin: 12px 0 0; font-size: .93rem; }
-.pub .cta { margin-top: 14px; }
-@media (max-width: 720px) { .pub { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+.venue { font-size: .84rem; color: var(--muted); font-style: italic; margin: 2px 0 10px; }
+.bib { margin: 12px 0 0; background: var(--bg2); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font: 400 .74rem/1.55 var(--font-mono); color: var(--fg); overflow-x: auto; white-space: pre; }
+@media (max-width: 560px) { .pub { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
 
-/* projects */
-.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.proj { border: 1px dashed var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 10px; align-content: start; min-height: 170px; background: linear-gradient(160deg, var(--glow), transparent 60%); }
-.proj p { color: var(--muted); font-size: .9rem; margin: 0; }
-.proj code { font: 400 .76rem var(--font-mono); color: var(--accent); }
-@media (max-width: 820px) { .projects { grid-template-columns: minmax(0, 1fr); } }
-
-/* talks timeline */
-.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
-.timeline li { position: relative; padding: 0 0 26px 26px; display: grid; gap: 4px; }
-.timeline li::before { content: ""; position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
-.timeline li.hi::before { border-color: var(--warm); background: var(--warm); }
-.timeline time { font: 500 .72rem var(--font-mono); color: var(--muted); letter-spacing: .04em; }
-.timeline .t { font-weight: 500; }
-.timeline .w { font-size: .86rem; color: var(--muted); }
-.kind { font: 500 .64rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; padding: 3px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--accent); margin-right: 8px; }
-.timeline li.hi .kind { color: var(--warm); border-color: var(--warm); }
-
-/* background */
-.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
-.skills { display: grid; gap: 16px; }
-.skills div { display: grid; gap: 8px; }
-.skills h4 { margin: 0; font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+.skill h4 { margin: 0; font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cat); }
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
-.pills span { font: 500 .8rem var(--font-body); padding: 6px 11px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+.pills span { font: 500 .8rem var(--font-body); padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg2); }
+@media (max-width: 860px) { .skills { grid-template-columns: minmax(0, 1fr); } }
+
+/* education & talks */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 48px; }
 .edu { display: grid; gap: 18px; }
 .edu div { border-left: 2px solid var(--accent); padding-left: 16px; display: grid; gap: 2px; }
 .edu b { font: 700 1rem var(--font-display); }
-.edu span { font-size: .88rem; color: var(--muted); }
-@media (max-width: 820px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.edu span { font-size: .86rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+.timeline li { position: relative; padding: 0 0 20px 24px; display: grid; gap: 2px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
+.timeline li.hi::before { border-color: var(--amber); background: var(--amber); }
+.timeline time { font: 500 .72rem var(--font-mono); color: var(--muted); }
+.timeline .t { font-size: .93rem; }
+.kind { font: 500 .62rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--accent); margin-right: 8px; }
+.timeline li.hi .kind { color: var(--amber); border-color: var(--amber); }
+.sub2 { margin: 30px 0 14px; font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
 
 /* contact */
-.contact { background: var(--bg2); border-top: 1px solid var(--line); }
-.contact .in { display: grid; gap: 18px; padding-block: 72px; }
-.contact h2 { max-width: 18ch; }
+.contact { margin-top: 84px; background: var(--bg2); border-top: 1px solid var(--line); padding-block: 0; }
+.contact .in { display: grid; gap: 18px; padding-block: 72px 24px; }
+.contact h2 { max-width: 20ch; }
 .mail { font: 500 clamp(1.1rem, 3vw, 1.6rem) var(--font-mono); color: var(--accent); user-select: all; word-break: break-all; }
-footer { font: 400 .72rem var(--font-mono); color: var(--muted); padding-block: 24px 40px; }
+footer { font: 400 .72rem var(--font-mono); color: var(--muted); padding-top: 28px; }
+
+/* project dialog */
+dialog { width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--fg); }
+dialog::backdrop { background: rgba(5, 8, 12, .65); backdrop-filter: blur(3px); }
+.dlg { display: grid; gap: 16px; padding: 24px; }
+.dlg .thumb { border-radius: 10px; border: 1px solid var(--line); }
+.dlg h3 { font-size: 1.5rem; }
+.dlg dl { margin: 0; display: grid; gap: 14px; }
+.dlg dt { font: 500 .7rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cat); }
+.dlg dd { margin: 3px 0 0; color: var(--muted); font-size: .94rem; }
+.dlg .pending { border: 1px dashed var(--line); border-radius: 10px; padding: 14px; color: var(--muted); font-size: .9rem; }
+.close { justify-self: end; }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
-img{max-width:100%}[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -262,11 +252,12 @@ img{max-width:100%}[hidden]{display:none!important}
   <div class="in">
     <a class="mark" href="#top">jn<span>.</span>keya</a>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#research">PhD</a></li>
+      <li><a href="#featured">Projects</a></li>
+      <li><a href="#data-science">Data Science</a></li>
+      <li><a href="#ml-dl">ML &amp; DL</a></li>
+      <li><a href="#applied-ai">Applied AI</a></li>
+      <li><a href="#phd">PhD research</a></li>
       <li><a href="#publications">Publications</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#talks">Talks</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch colour theme">Theme: auto</button>
@@ -274,34 +265,35 @@ img{max-width:100%}[hidden]{display:none!important}
 </nav>
 
 <header class="hero" id="top">
+  <div class="cover" id="cover"><img src="assets/img/cover.jpg" alt="Data flowing from observations into an AI system that analyzes, models, reasons and acts" onerror="document.getElementById('cover').hidden=true"></div>
   <div class="in">
     <div>
-      <div class="kicker">AI × Atmospheric science</div>
-      <h1>I turn messy data into <em>models that work</em>.</h1>
+      <div class="kicker"><span class="k1">Data Science</span><span class="k2">Machine Learning</span><span class="k3">Applied AI</span></div>
+      <h1>Turning data into <em>intelligence</em>.</h1>
       <div class="profile">
         <div class="avatar"><span aria-label="Photo placeholder">JK</span></div>
         <div>
-          <p class="who"><b>Jebun Naher Keya</b> · Data scientist &amp; PhD candidate</p>
-          <p class="where">IRIS Lab, UNIST · Ulsan, South Korea</p>
+          <p class="who">Jebun Naher Keya</p>
+          <p class="where">Data scientist &amp; AI/ML practitioner · PhD candidate, UNIST</p>
         </div>
       </div>
-      <p class="bio">I work where <b>AI meets atmospheric science</b>. In my PhD I build machine learning and deep
-        learning models that make satellite methane monitoring more accurate. In my free time I build data science
-        projects on <b>weather forecasting, agentic AI, foundation models and business data</b>.</p>
+      <p class="bio">I'm a <b>data scientist and AI/ML practitioner</b> with strong research experience. I build models and
+        intelligent systems across domains, from predictive analytics and computer vision to LLM agents and
+        quantitative trading, and I validate them so they hold up on data they've never seen.</p>
       <div class="cta">
-        <a class="btn solid" href="#projects">See my projects</a>
+        <a class="btn solid" href="#featured">View projects</a>
         <a class="btn" href="https://github.com/yixi-k">GitHub</a>
         <a class="btn" aria-disabled="true">CV</a>
       </div>
       <div class="iconrow">
+        <a href="https://www.linkedin.com/in/jnkeya/">LinkedIn ↗</a>
         <a href="https://scholar.google.com/citations?user=DznVIfMo4BQC">Google Scholar ↗</a>
         <a href="https://orcid.org/0009-0007-4575-6775">ORCID ↗</a>
-        <a href="https://www.linkedin.com/in/jnkeya/">LinkedIn ↗</a>
         <a href="https://www.researchgate.net/profile/Jebun-Naher-Keya">ResearchGate ↗</a>
       </div>
     </div>
 
-    <figure class="sim" style="margin:0">
+    <figure class="sim">
       <div class="simhead">
         <span class="live" id="pstate">Neural network training</span>
         <div class="toggle" role="group" aria-label="Class to add">
@@ -319,106 +311,108 @@ img{max-width:100%}[hidden]{display:none!important}
         </div>
         <span>epoch <span class="readout" id="ep">0</span> · loss <span class="readout" id="loss">–</span></span>
       </div>
-      <figcaption class="note">Click the plot to add points. A 2-16-16-1 network retrains live in your browser.</figcaption>
+      <figcaption class="note">Live demo: click to add points. A neural network I wrote from scratch retrains in your browser.</figcaption>
     </figure>
   </div>
 </header>
 
-<div class="stats">
+<div class="highlights" aria-label="Highlights">
   <div class="in">
-    <div class="stat"><b>8</b><span>model families I work with, from gradient boosting to Mamba and KAN</span></div>
-    <div class="stat"><b>2</b><span>peer-reviewed papers, plus an open dataset</span></div>
-    <div class="stat"><b>6</b><span>conference talks and posters, incl. an invited oral at SPIE 2026</span></div>
-    <div class="stat"><b>ICML</b><span>attended ICML 2026 in Seoul</span></div>
+    <div class="hl"><b>3 areas</b><span>Data science, ML &amp; deep learning, and applied AI</span></div>
+    <div class="hl"><b>8 model families</b><span>From gradient boosting to Transformers, Mamba and KAN</span></div>
+    <div class="hl"><b>1st-author paper</b><span>ML for large multi-source data, published 2026</span></div>
+    <div class="hl"><b>Invited talk</b><span>SPIE Asia-Pacific Remote Sensing 2026, plus 5 more conference talks</span></div>
   </div>
 </div>
 
 <main>
-  <section id="about">
+  <section id="featured">
     <div class="in">
-      <div class="sechead"><span class="label">About</span><h2>Hi, I'm Jebun.</h2></div>
-      <div class="about">
-        <div>
-          <p>I'm a PhD candidate at UNIST (IRIS Lab) working at the intersection of <b>AI and atmospheric science</b>.
-            My research improves methane monitoring end to end: correcting satellite retrieval bias, fusing multiple
-            sensors, filling the gaps, and feeding better data into emission inversion. I also work on ammonia (NH₃)
-            and ozone (O₃).</p>
-          <p>Beyond my PhD, I'm deeply interested in <b>machine learning and data science</b> in general. In my
-            free time I build projects on weather forecasting, agentic AI, foundation models and business data.</p>
-        </div>
-        <div>
-          <h4>Interests</h4>
-          <ul>
-            <li>Machine learning and data science</li>
-            <li>Deep learning: Transformers, state-space models, KAN</li>
-            <li>AI for atmospheric science</li>
-            <li>Weather forecasting</li>
-            <li>Agentic AI and foundation models</li>
-            <li>Business data</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Education</h4>
-          <ul>
-            <li><b>MS–PhD, Environmental Engineering</b><span class="yr">UNIST, Korea · 2023–present</span></li>
-            <li><b>BSc, Soil and Environmental Sciences</b><span class="yr">University of Barishal, Bangladesh · 2022</span></li>
-          </ul>
-          <h4 style="margin-top:22px">Awards</h4>
-          <ul><li>UNIST fully funded research scholarship<span class="yr">2023–present</span></li></ul>
-        </div>
+      <div class="sechead">
+        <span class="label">Featured projects</span>
+        <h2>Depth from research, breadth from building.</h2>
+        <p>Click any project for the problem, data, approach, metrics and results. Projects marked Coming soon are being built and will be published with code.</p>
+      </div>
+      <div class="grid feat" id="grid-featured"></div>
+    </div>
+  </section>
+
+  <section id="areas" style="padding-top:64px">
+    <div class="in">
+      <div class="area" id="data-science" data-cat="data-science">
+        <aside>
+          <span class="num">01 · Data Science</span>
+          <h3>From raw data to decisions.</h3>
+          <ul><li>Exploratory data analysis</li><li>Statistical analysis</li><li>Feature engineering</li><li>Predictive modeling</li><li>Business analytics</li><li>Data-driven decision-making</li></ul>
+        </aside>
+        <div class="grid" id="grid-data-science"></div>
+      </div>
+      <div class="area" id="ml-dl" data-cat="ml-dl">
+        <aside>
+          <span class="num">02 · Machine Learning &amp; Deep Learning</span>
+          <h3>Models that generalize.</h3>
+          <ul><li>Classification and regression</li><li>Computer vision</li><li>Image segmentation and classification</li><li>Time-series forecasting</li><li>Model evaluation and optimization</li><li>Neural network architectures</li></ul>
+        </aside>
+        <div class="grid" id="grid-ml-dl"></div>
+      </div>
+      <div class="area" id="applied-ai" data-cat="applied-ai">
+        <aside>
+          <span class="num">03 · Applied AI</span>
+          <h3>Intelligent systems that do work.</h3>
+          <ul><li>Agentic AI, agents and workflows</li><li>Foundation models</li><li>LLM applications</li><li>Retrieval-augmented generation</li><li>Quantitative trading experiments</li><li>AI-powered tools</li></ul>
+        </aside>
+        <div class="grid" id="grid-applied-ai"></div>
       </div>
     </div>
   </section>
 
-  <section id="research" style="padding-top:0">
+  <section id="phd" data-cat="research">
     <div class="in">
       <div class="sechead">
         <span class="label">PhD research</span>
-        <h2>Better methane monitoring, from satellite to emissions.</h2>
-        <p>Each step uses machine learning to make the next one more reliable.</p>
+        <h2>Machine Learning for Atmospheric Data</h2>
+        <p>My PhD at UNIST (IRIS Lab, 2023–present) is a long-running, large-scale ML project. The application is atmospheric monitoring; the skills transfer to any messy, multi-source dataset.</p>
       </div>
-      <div class="pipe four">
-        <div class="step"><b>Retrieval bias correction</b><span>Learn and remove systematic errors in each satellite sensor's methane retrievals.</span></div>
-        <div class="step"><b>Multi-sensor fusion</b><span>Harmonize several sensors and merge them into one consistent record. <a href="#publications">Published 2026</a></span></div>
-        <div class="step"><b>Gap-filling</b><span>Deep learning on spatial and temporal context to fill what clouds and orbits miss.</span></div>
-        <div class="step"><b>Improved inversion</b><span>Feed better observations into inverse models for more accurate emission estimates.</span></div>
+      <div class="phd">
+        <dl>
+          <div><dt>Problem</dt><dd>Satellite measurements carry <b>systematic errors</b> and leave <b>large gaps</b> where clouds or orbits block the view, which limits downstream emission estimates.</dd></div>
+          <div><dt>Approach</dt><dd>Gradient-boosted models with staged feature selection correct each source; the sources are harmonized and <b>fused into one daily dataset</b>; spatio-temporal deep learning (Mamba / state-space, KAN) <b>fills the gaps</b>; the improved data feeds emission inversion.</dd></div>
+          <div><dt>Validation</dt><dd>Group-wise hold-outs: whole sites, months and years left out, so scores reflect real generalization rather than memorization.</dd></div>
+          <div><dt>Result</dt><dd>
+            <div class="bigstat"><div><b>0.81</b><span>R², withheld sites</span></div><div><b>10.78</b><span>RMSE (ppb)</span></div><div><b>2026</b><span>first-author paper</span></div></div>
+          </dd></div>
+        </dl>
+        <div style="display:grid;gap:14px;align-content:start">
+          <dt class="label" style="color:var(--warm)">Transferable skills</dt>
+          <div class="skillgrid">
+            <span>Large-scale data processing</span><span>Multi-source data integration</span>
+            <span>Machine learning</span><span>Deep learning</span>
+            <span>Spatio-temporal modeling</span><span>Model validation</span>
+            <span>Scientific computing (GPU, Linux)</span><span>Interpretability (SHAP)</span>
+          </div>
+          <p style="margin:6px 0 0;color:var(--muted);font-size:.88rem">Also applied to ammonia and ozone.</p>
+          <div class="cta">
+            <button class="btn small" type="button" data-open="phd-research">Full project details</button>
+            <a class="btn small" href="https://doi.org/10.5194/amt-19-4313-2026">Paper</a>
+            <a class="btn small" href="https://doi.org/10.5281/zenodo.18714292">Dataset</a>
+          </div>
+        </div>
       </div>
-      <div class="also"><span class="label">Also working on</span><span class="pill2">Ammonia (NH₃)</span><span class="pill2">Ozone (O₃)</span></div>
     </div>
   </section>
 
-  <section id="approach" style="padding-top:0">
+  <section id="publications">
     <div class="in">
-      <div class="sechead">
-        <span class="label">How I work</span>
-        <h2>From a raw dataset to something people can use.</h2>
-      </div>
-      <div class="pipe">
-        <div class="step"><b>Explore</b><span>Understand the data: coverage, gaps, outliers and what the target really is.</span></div>
-        <div class="step"><b>Engineer</b><span>Clean, join and build features, and keep test data untouched.</span></div>
-        <div class="step"><b>Model</b><span>Start with a strong baseline, then try deep models where they earn their cost.</span></div>
-        <div class="step"><b>Validate</b><span>Hold out whole groups, places or periods so scores reflect real generalization.</span></div>
-        <div class="step"><b>Ship</b><span>Code, a clear README, figures and, where it helps, an interactive demo.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="publications" style="padding-top:0">
-    <div class="in">
-      <div class="sechead">
-        <span class="label">Publications</span>
-        <h2>Selected work</h2>
-      </div>
+      <div class="sechead"><span class="label">Publications</span><h2>Papers</h2></div>
       <div class="pubs">
         <article class="pub">
-          <div class="thumb" aria-hidden="true">CH₄</div>
+          <span class="yr">2026</span>
           <div>
-            <span class="venue">Atmospheric Measurement Techniques · 2026 · first author</span>
             <h3>Enhanced methane monitoring: a globally harmonized daily 0.1° XCH₄ through machine learning-based fusion of GOSAT, GOSAT-2, and TROPOMI</h3>
             <p class="authors"><span class="me">J. N. Keya</span>, Y. Kim, H. Choi, J. Im</p>
-            <p class="tldr">Gradient-boosted models bias-correct three satellite data streams against ground truth and fuse them into one global daily dataset. R² 0.81, RMSE 10.78 ppb at withheld sites.</p>
+            <p class="venue">Atmospheric Measurement Techniques, 19(12), 4313–4334 · first author</p>
             <div class="cta">
-              <a class="btn small solid" href="https://doi.org/10.5194/amt-19-4313-2026">Paper</a>
+              <a class="btn small" href="https://doi.org/10.5194/amt-19-4313-2026">Paper</a>
               <a class="btn small" href="https://doi.org/10.5281/zenodo.18714292">Dataset</a>
               <button class="btn small cite" type="button" data-bib="bib1" aria-expanded="false">Cite</button>
             </div>
@@ -435,12 +429,11 @@ img{max-width:100%}[hidden]{display:none!important}
           </div>
         </article>
         <article class="pub">
-          <div class="thumb" aria-hidden="true">AI × AQ</div>
+          <span class="yr">2025</span>
           <div>
-            <span class="venue">J. Korean Soc. Atmospheric Environment · 2025 · co-author</span>
             <h3>Satellite-based air quality monitoring using artificial intelligence: research trends and future perspectives</h3>
             <p class="authors">H. Choi, S. Hwang, E. Kang, Y. Kim, S. Yang, S. Malik, <span class="me">J. N. Keya</span>, S. Lee, J. Im</p>
-            <p class="tldr">A review of how AI is used to monitor air quality from satellites, and where the field is heading.</p>
+            <p class="venue">Journal of Korean Society for Atmospheric Environment, 41(2), 179–198</p>
             <div class="cta">
               <a class="btn small" href="https://doi.org/10.5572/KOSAE.2025.41.2.179">Paper</a>
               <button class="btn small cite" type="button" data-bib="bib2" aria-expanded="false">Cite</button>
@@ -461,57 +454,59 @@ img{max-width:100%}[hidden]{display:none!important}
     </div>
   </section>
 
-  <section id="projects" style="padding-top:0">
+  <section id="skills">
     <div class="in">
-      <div class="sechead">
-        <span class="label">Projects</span>
-        <h2>Free-time projects</h2>
-        <p>Machine learning and data science beyond my PhD. Each project gets its own repository and README.</p>
-      </div>
-      <div class="projects">
-        <div class="proj"><span class="state">Repo coming soon</span><h3>Weather forecasting</h3><p>Deep learning models that forecast weather from past observations.</p></div>
-        <div class="proj"><span class="state">Repo coming soon</span><h3>Agentic AI</h3><p>LLM agents that plan, call tools and work through multi-step data tasks.</p></div>
-        <div class="proj"><span class="state">Repo coming soon</span><h3>Foundation models</h3><p>Exploring large pretrained models and how they adapt to new data.</p></div>
-        <div class="proj"><span class="state">Repo coming soon</span><h3>Business data</h3><p>Data science on business datasets: analysis, prediction and clear insight.</p></div>
+      <div class="sechead"><span class="label">Technical skills</span><h2>Toolkit</h2></div>
+      <div class="skills">
+        <div class="skill" data-cat="data-science"><h4>Data Science</h4><div class="pills"><span>Python</span><span>EDA</span><span>Statistics</span><span>Feature engineering</span><span>SHAP</span><span>Optuna</span><span>Matplotlib</span></div></div>
+        <div class="skill" data-cat="ml-dl"><h4>Machine &amp; Deep Learning</h4><div class="pills"><span>PyTorch</span><span>XGBoost</span><span>LightGBM</span><span>Random Forest</span><span>CNNs</span><span>Transformers</span><span>Mamba / SSMs</span><span>KAN</span><span>TabM</span></div></div>
+        <div class="skill" data-cat="applied-ai"><h4>Applied AI &amp; Compute</h4><div class="pills"><span>LLM agents</span><span>Foundation models</span><span>Linux</span><span>GPU / CUDA</span><span>NetCDF / HDF5</span><span>Git</span><span>LaTeX</span></div></div>
       </div>
     </div>
   </section>
 
-  <section id="talks" style="padding-top:0">
+  <section id="background">
     <div class="in two">
       <div>
-        <div class="sechead"><span class="label">Talks</span><h2>On stage</h2></div>
-        <ul class="timeline">
-          <li class="hi"><time>Nov 2026 · Yokohama</time><span class="t"><span class="kind">Invited oral</span>Globally harmonized daily 0.1° XCH₄ through machine-learning-based fusion</span><span class="w">SPIE Asia-Pacific Remote Sensing 2026</span></li>
-          <li><time>Jul 2026 · Seoul</time><span class="t"><span class="kind">Attended</span>ICML 2026</span><span class="w">International Conference on Machine Learning</span></li>
-          <li><time>Dec 2025 · New Orleans</time><span class="t"><span class="kind">Poster</span>Global XCH₄ mapping through ML and multi-sensor fusion</span><span class="w">AGU Fall Meeting 2025 (accepted)</span></li>
-          <li><time>Nov 2025 · Jeju</time><span class="t"><span class="kind">Oral ×2</span>ML-based bias correction of multi-satellite XCH₄</span><span class="w">KAGIS / IAG'i Symposium · GeoAI Data Conference</span></li>
-          <li><time>Oct 2025 · Yeosu</time><span class="t"><span class="kind">Oral</span>Integrating multi-satellite methane with ML bias correction</span><span class="w">KSRS Fall Conference 2025</span></li>
-          <li><time>May 2025 · Incheon</time><span class="t"><span class="kind">Oral</span>ML bias correction of global methane from multiple satellites</span><span class="w">ISRS 2025</span></li>
-        </ul>
+        <div class="sechead"><span class="label">Education &amp; experience</span><h2>Background</h2></div>
+        <div class="edu">
+          <div><b>Graduate researcher, IRIS Lab, UNIST</b><span>Sep 2023–present · machine learning research on large-scale data</span></div>
+          <div><b>MS–PhD, Environmental Engineering</b><span>UNIST, Korea · 2023–present · fully funded research scholarship</span></div>
+          <div><b>BSc, Soil and Environmental Sciences</b><span>University of Barishal, Bangladesh · 2022</span></div>
+        </div>
       </div>
       <div>
-        <div class="sechead"><span class="label">Toolkit</span><h2>What I build with</h2></div>
-        <div class="skills">
-          <div><h4>Deep learning</h4><div class="pills"><span>PyTorch</span><span>Transformers</span><span>Mamba / SSMs</span><span>KAN</span><span>CNNs</span><span>TabM</span></div></div>
-          <div><h4>Machine learning</h4><div class="pills"><span>XGBoost</span><span>LightGBM</span><span>Random Forest</span><span>SHAP</span><span>Optuna</span></div></div>
-          <div><h4>Agentic AI</h4><div class="pills"><span>LLM agent workflows</span></div></div>
-          <div><h4>Data &amp; compute</h4><div class="pills"><span>Python</span><span>Linux</span><span>GPU / CUDA</span><span>NetCDF</span><span>HDF5</span><span>ArcGIS Pro</span></div></div>
-        </div>
+        <p class="sub2" style="margin-top:0">Talks &amp; conferences</p>
+        <ul class="timeline">
+          <li class="hi"><time>Nov 2026 · Yokohama</time><span class="t"><span class="kind">Invited oral</span>SPIE Asia-Pacific Remote Sensing 2026</span></li>
+          <li><time>Jul 2026 · Seoul</time><span class="t"><span class="kind">Attended</span>ICML 2026</span></li>
+          <li><time>Dec 2025 · New Orleans</time><span class="t"><span class="kind">Poster</span>AGU Fall Meeting 2025 (accepted)</span></li>
+          <li><time>Nov 2025 · Jeju</time><span class="t"><span class="kind">Oral ×2</span>KAGIS / IAG'i Symposium · GeoAI Data Conference</span></li>
+          <li><time>Oct 2025 · Yeosu</time><span class="t"><span class="kind">Oral</span>KSRS Fall Conference 2025</span></li>
+          <li><time>May 2025 · Incheon</time><span class="t"><span class="kind">Oral</span>ISRS 2025</span></li>
+        </ul>
       </div>
     </div>
   </section>
 </main>
 
-<section class="contact" id="contact" style="padding:0">
+<section class="contact" id="contact">
   <div class="in">
     <span class="label">Contact</span>
-    <h2>Open to collaborations in AI, data science and atmospheric science.</h2>
+    <h2>Open to data science and AI/ML roles and collaborations.</h2>
     <div class="mail">jnkeya@unist.ac.kr</div>
+    <div class="iconrow" style="margin-top:0">
+      <a href="https://www.linkedin.com/in/jnkeya/">LinkedIn ↗</a>
+      <a href="https://github.com/yixi-k">GitHub ↗</a>
+      <a href="https://scholar.google.com/citations?user=DznVIfMo4BQC">Google Scholar ↗</a>
+    </div>
     <footer>© 2026 Jebun Naher Keya · Last updated November 2026</footer>
   </div>
 </section>
 
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script src="assets/projects.js"></script>
 <script>
 (() => {
   const cv = document.getElementById('play'), ctx = cv.getContext('2d');
@@ -607,6 +602,93 @@ img{max-width:100%}[hidden]{display:none!important}
   make('moons');
   if (reduce) { train(400); draw(); }
   else { train(1); draw(); setInterval(() => { if (pts.length && epoch < until) { train(2); draw(); } }, 40); }
+})();
+</script>
+<script>
+(() => {
+  const P = window.PROJECTS || [];
+  const CAT = { "data-science": "Data Science", "ml-dl": "ML & Deep Learning", "applied-ai": "Applied AI", "research": "Research" };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // deterministic generated thumbnails (illustrative graphics, not results)
+  function rng(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+  function hash(str) { let h = 7; for (const c of str) h = (h * 31 + c.charCodeAt(0)) % 2147483647; return h || 1; }
+  const C = { a: "var(--accent)", m: "var(--mint)", y: "var(--amber)", w: "var(--warm)", l: "var(--line)", t: "var(--muted)", s: "var(--surface)" };
+  function svg(inner) { return `<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="320" height="180" fill="var(--bg2)"/>${inner}</svg>`; }
+  const V = {
+    research(r) { let o = ""; for (let k = 0; k < 4; k++) { const x = 70 + k * 26, y = 30 + k * 14;
+        o += `<g opacity="${.35 + k * .2}">`; for (let i = 0; i < 8; i++) for (let j = 0; j < 5; j++) { const v = r(); if (k < 3 && v < .3) continue;
+          o += `<rect x="${x + i * 14}" y="${y + j * 14}" width="12" height="12" rx="2" fill="${v > .66 ? C.w : v > .4 ? C.y : C.a}"/>`; } o += `</g>`; }
+      return o; },
+    playground(r) { let o = `<path d="M0 120 C80 40 160 160 320 60 L320 180 L0 180Z" fill="${C.w}" opacity=".18"/><path d="M0 120 C80 40 160 160 320 60" stroke="${C.t}" stroke-dasharray="4 4" fill="none"/>`;
+      for (let i = 0; i < 46; i++) { const x = r() * 320, y = r() * 180, b = y > 120 - 60 * Math.sin(x / 70); o += `<circle cx="${x}" cy="${y}" r="4" fill="${b ? C.w : C.a}"/>`; } return o; },
+    bars(r) { let o = ""; for (let i = 0; i < 10; i++) { const h = 30 + r() * 110; o += `<rect x="${28 + i * 27}" y="${160 - h}" width="18" height="${h}" rx="3" fill="${i === 6 ? C.y : C.a}" opacity="${i === 6 ? 1 : .55}"/>`; }
+      return o + `<line x1="20" x2="300" y1="160" y2="160" stroke="${C.l}"/>`; },
+    scatter(r) { let o = ""; for (let i = 0; i < 70; i++) { const x = 20 + r() * 280, y = 160 - (x - 20) * .45 - (r() - .5) * 60; o += `<circle cx="${x}" cy="${y}" r="3" fill="${C.a}" opacity=".7"/>`; }
+      return o + `<line x1="20" y1="160" x2="300" y2="34" stroke="${C.y}" stroke-width="2"/>`; },
+    segmentation(r) { let o = ""; for (let i = 0; i < 18; i++) for (let j = 0; j < 10; j++) o += `<rect x="${i * 18}" y="${j * 18}" width="18" height="18" fill="${C.t}" opacity="${.05 + r() * .12}"/>`;
+      return o + `<path d="M60 130 C40 80 90 40 140 60 C190 80 170 140 120 150 Z" fill="${C.m}" opacity=".45" stroke="${C.m}" stroke-width="2"/><path d="M200 60 h70 v80 h-70 Z" fill="${C.y}" opacity=".35" stroke="${C.y}" stroke-width="2" rx="8"/>`; },
+    confusion(r) { let o = ""; const n = 5, s = 28, x0 = 90, y0 = 20; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const v = i === j ? .7 + r() * .3 : r() * .22;
+        o += `<rect x="${x0 + j * s}" y="${y0 + i * s}" width="${s - 2}" height="${s - 2}" rx="3" fill="${C.m}" opacity="${v.toFixed(2)}"/>`; } return o; },
+    forecast(r) { let y = 100, p = "M10 100", q = ""; for (let x = 10; x <= 210; x += 10) { y += (r() - .5) * 24; y = Math.max(40, Math.min(150, y)); p += ` L${x} ${y.toFixed(1)}`; }
+      let y2 = y; q = `M210 ${y.toFixed(1)}`; let up = "", lo = ""; for (let x = 210; x <= 310; x += 10) { y2 += (r() - .5) * 14; q += ` L${x} ${y2.toFixed(1)}`; const w = (x - 210) * .35; up += ` L${x} ${(y2 - w).toFixed(1)}`; lo = ` L${x} ${(y2 + w).toFixed(1)}` + lo; }
+      return `<path d="M210 ${y.toFixed(1)}${up}${lo} Z" fill="${C.m}" opacity=".18"/><path d="${p}" stroke="${C.a}" stroke-width="2.2" fill="none"/><path d="${q}" stroke="${C.m}" stroke-width="2.2" stroke-dasharray="5 4" fill="none"/><line x1="210" x2="210" y1="20" y2="165" stroke="${C.l}"/>`; },
+    detect(r) { let o = ""; for (let i = 0; i < 18; i++) for (let j = 0; j < 10; j++) o += `<rect x="${i * 18}" y="${j * 18}" width="18" height="18" fill="${C.t}" opacity="${.04 + r() * .1}"/>`;
+      [[40, 50, 80, 70, C.m], [160, 30, 60, 60, C.y], [210, 100, 80, 55, C.a]].forEach(([x, y, w, h, c]) => o += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="${c}" stroke-width="2.5" rx="3"/><rect x="${x}" y="${y - 12}" width="34" height="12" fill="${c}"/>`); return o; },
+    agent() { const n = [[60, 90, "LLM", C.y], [170, 40, "plan", C.a], [170, 140, "tools", C.m], [270, 90, "result", C.w]]; let o = "";
+      [[0, 1], [0, 2], [1, 3], [2, 3], [1, 2]].forEach(([a, b]) => o += `<line x1="${n[a][0]}" y1="${n[a][1]}" x2="${n[b][0]}" y2="${n[b][1]}" stroke="${C.t}" stroke-width="1.5" opacity=".6"/>`);
+      n.forEach(([x, y, t, c]) => o += `<circle cx="${x}" cy="${y}" r="24" fill="${C.s}" stroke="${c}" stroke-width="2.5"/><text x="${x}" y="${y + 4}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="var(--fg)">${t}</text>`); return o; },
+    embedding(r) { let o = ""; [[90, 70, C.a], [210, 60, C.m], [160, 130, C.y]].forEach(([cx, cy, c]) => { for (let i = 0; i < 28; i++) o += `<circle cx="${cx + (r() - .5) * 70}" cy="${cy + (r() - .5) * 50}" r="3" fill="${c}" opacity=".8"/>`; }); return o; },
+    rag() { const box = (x, t, c) => `<rect x="${x}" y="60" width="64" height="60" rx="8" fill="${C.s}" stroke="${c}" stroke-width="2"/><text x="${x + 32}" y="94" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="var(--fg)">${t}</text>`;
+      return box(18, "docs", C.a) + box(128, "vectors", C.m) + box(238, "LLM", C.y) + `<path d="M84 90 H126 M194 90 H236" stroke="${C.t}" stroke-width="2" marker-end="url(#ar)"/><defs><marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L6 3 L0 6Z" fill="var(--muted)"/></marker></defs>`; },
+    candles(r) { let o = "", y = 90; for (let i = 0; i < 22; i++) { const x = 18 + i * 13, open = y, close = y + (r() - .48) * 26, hi = Math.min(open, close) - r() * 14, lo = Math.max(open, close) + r() * 14, up = close < open;
+        o += `<line x1="${x + 4}" x2="${x + 4}" y1="${hi}" y2="${lo}" stroke="${up ? C.m : C.w}"/><rect x="${x}" y="${Math.min(open, close)}" width="8" height="${Math.max(2, Math.abs(close - open))}" fill="${up ? C.m : C.w}"/>`; y = Math.max(40, Math.min(140, close)); } return o; }
+  };
+  function thumb(p) {
+    if (p.image) return `<span class="thumb"><img src="${esc(p.image)}" alt="" loading="lazy"></span>`;
+    const f = V[p.visual] || V.scatter;
+    return `<span class="thumb">${svg(f(rng(hash(p.id))))}</span>`;
+  }
+  const stCls = s => s === "Completed" ? "status done" : s === "Live" ? "status live" : "status";
+  function card(p) {
+    return `<button class="card" type="button" data-cat="${p.category}" data-id="${esc(p.id)}">
+      ${thumb(p)}
+      <span class="body">
+        <span class="meta"><span class="cat">${CAT[p.category] || ""}</span><span class="${stCls(p.status)}">${esc(p.status)}</span></span>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.summary)}</p>
+        <span class="tags">${(p.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</span>
+        <span class="more">Details →</span>
+      </span></button>`;
+  }
+  const fill = (id, list) => { const el = document.getElementById(id); if (el) el.innerHTML = list.map(card).join(""); };
+  fill("grid-featured", P.filter(p => p.featured));
+  ["data-science", "ml-dl", "applied-ai"].forEach(c => fill("grid-" + c, P.filter(p => p.category === c)));
+
+  // detail dialog
+  const dlg = document.getElementById("dlg"), body = document.getElementById("dlg-body");
+  const FIELDS = [["problem", "Problem"], ["dataset", "Dataset"], ["approach", "Approach"], ["architecture", "Model / architecture"], ["metrics", "Evaluation metrics"], ["results", "Results"], ["learned", "What I learned"]];
+  function open(id) {
+    const p = P.find(x => x.id === id); if (!p) return;
+    const have = FIELDS.filter(([k]) => p[k]);
+    body.dataset.cat = p.category;
+    body.innerHTML = `<button class="btn small close" type="button" id="dlg-close">Close</button>
+      ${thumb(p)}
+      <span class="meta"><span class="cat">${CAT[p.category]}</span><span class="${stCls(p.status)}">${esc(p.status)}</span></span>
+      <h3 id="dlg-title">${esc(p.title)}</h3>
+      <p style="margin:0;color:var(--muted)">${esc(p.summary)}</p>
+      ${have.length ? `<dl>${have.map(([k, l]) => `<div><dt>${l}</dt><dd>${esc(p[k])}</dd></div>`).join("")}</dl>`
+        : `<div class="pending">This project is being built. Problem, dataset, approach, metrics, results and the GitHub repository will appear here when it is published.</div>`}
+      <span class="tags">${(p.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</span>
+      ${(p.links || []).length ? `<div class="cta">${p.links.map(l => `<a class="btn small" href="${esc(l.href)}">${esc(l.label)}</a>`).join("")}</div>` : ""}`;
+    document.getElementById("dlg-close").addEventListener("click", () => dlg.close());
+    body.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", () => dlg.close()));
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+  document.addEventListener("click", e => {
+    const c = e.target.closest("[data-id], [data-open]"); if (c) open(c.dataset.id || c.dataset.open);
+  });
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 })();
 </script>
 <script>
