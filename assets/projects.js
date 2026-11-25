@@ -9,9 +9,7 @@
   category   "data-science" | "ml-dl" | "applied-ai" | "research"
   status     "Completed" | "Live" | "In progress" | "Coming soon"
   featured   true to show in "Featured projects"
-  visual     thumbnail style: "research" | "playground" | "bars" | "scatter" | "segmentation"
-             | "confusion" | "forecast" | "detect" | "agent" | "embedding" | "rag" | "candles"
-  image      optional path to a real screenshot/plot (e.g. "assets/img/seg.png"); replaces the generated thumbnail
+  image      optional path to a real screenshot or plot (e.g. "assets/img/seg.png"), shown on the card
   summary    one or two sentences for the card
   tags       short list of methods/tools
   problem, dataset, approach, architecture, metrics, results, learned
@@ -55,96 +53,6 @@ window.PROJECTS = [
       { label: "Try it", href: "#top" },
       { label: "Code", href: "https://github.com/yixi-k/yixi-k.github.io" }
     ]
-  },
-  {
-    id: "agentic-ai",
-    title: "Agentic AI application",
-    category: "applied-ai",
-    status: "Coming soon",
-    featured: true,
-    visual: "agent",
-    summary: "An LLM agent that plans, calls tools and works through a multi-step data task.",
-    tags: ["LLM agents", "Tool use", "Workflows"]
-  },
-  {
-    id: "predictive-analytics",
-    title: "Predictive analytics",
-    category: "data-science",
-    status: "Coming soon",
-    visual: "scatter",
-    summary: "End-to-end predictive modelling on a tabular dataset: EDA, feature engineering, model comparison and evaluation.",
-    tags: ["EDA", "Feature engineering", "Regression", "Classification"]
-  },
-  {
-    id: "business-intelligence",
-    title: "Business intelligence and data analysis",
-    category: "data-science",
-    status: "Coming soon",
-    visual: "bars",
-    summary: "Statistical analysis and dashboards on business data, turned into clear, decision-ready findings.",
-    tags: ["Statistics", "Business analytics", "Visualization"]
-  },
-  {
-    id: "image-segmentation",
-    title: "Image segmentation",
-    category: "ml-dl",
-    status: "Coming soon",
-    visual: "segmentation",
-    summary: "A pixel-level segmentation model, from data pipeline and training to mask quality metrics.",
-    tags: ["Computer vision", "Segmentation", "PyTorch"]
-  },
-  {
-    id: "image-classification",
-    title: "Image classification",
-    category: "ml-dl",
-    status: "Coming soon",
-    visual: "confusion",
-    summary: "CNN and Transformer image classifiers compared on the same data, with per-class evaluation.",
-    tags: ["Computer vision", "CNNs", "Transformers"]
-  },
-  {
-    id: "time-series-forecasting",
-    title: "Time-series forecasting",
-    category: "ml-dl",
-    status: "Coming soon",
-    visual: "forecast",
-    summary: "Deep learning forecasts compared against classical baselines, with honest back-testing.",
-    tags: ["Time series", "Forecasting", "Deep learning"]
-  },
-  {
-    id: "computer-vision-app",
-    title: "Computer vision application",
-    category: "ml-dl",
-    status: "Coming soon",
-    visual: "detect",
-    summary: "A practical vision tool that runs a trained model on new images.",
-    tags: ["Computer vision", "Deployment"]
-  },
-  {
-    id: "foundation-models",
-    title: "Foundation model experiments",
-    category: "applied-ai",
-    status: "Coming soon",
-    visual: "embedding",
-    summary: "Adapting large pretrained models to new data with embeddings and fine-tuning.",
-    tags: ["Foundation models", "Fine-tuning", "Embeddings"]
-  },
-  {
-    id: "llm-rag",
-    title: "LLM application with retrieval",
-    category: "applied-ai",
-    status: "Coming soon",
-    visual: "rag",
-    summary: "An LLM-powered tool that answers questions from a document collection using retrieval-augmented generation.",
-    tags: ["LLMs", "RAG", "Vector search"]
-  },
-  {
-    id: "quant-trading",
-    title: "Quantitative trading experiments",
-    category: "applied-ai",
-    status: "Coming soon",
-    visual: "candles",
-    summary: "Signals and back-tests on financial market data, evaluated with risk-aware metrics.",
-    tags: ["Quant", "Financial data", "Back-testing"]
   }
+
 ];
