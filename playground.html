@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neural Network Playground</title>
+<meta name="description" content="A small neural network, written from scratch, that learns a decision boundary live in the browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400&display=swap">
+<style>
+:root { --bg: #ffffff; --bg2: #f3f5f8; --fg: #212529; --muted: #6c757d; --line: #e6e8eb; --primary: #1565c0; --accent: #1565c0; --warm: #e0592a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #17191d; --bg2: #1f2227; --fg: #e8eaed; --muted: #a0a7b0; --line: #2d3138; --primary: #64a8f0; --accent: #64a8f0; --warm: #f08a5d; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #17191d; --bg2: #1f2227; --fg: #e8eaed; --muted: #a0a7b0; --line: #2d3138; --primary: #64a8f0; --accent: #64a8f0; --warm: #f08a5d; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 1rem/1.7 "Roboto", system-ui, sans-serif; }
+main { max-width: 760px; margin: 0 auto; padding: 48px max(20px, env(safe-area-inset-right, 0px)) 64px max(20px, env(safe-area-inset-left, 0px)); display: grid; gap: 16px; }
+a { color: var(--primary); text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font: 700 1.9rem/1.2 "Montserrat", sans-serif; margin: 0; }
+p { margin: 0; color: var(--muted); }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.theme-btn, .chip, .toggle button { font: 500 .78rem "Montserrat", sans-serif; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+.toggle { display: inline-flex; gap: 6px; }
+.toggle button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+#cA::first-letter { color: var(--accent); } #cB::first-letter { color: var(--warm); }
+.toggle button[aria-pressed="true"]::first-letter { color: #fff; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 10px; }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font: 400 .8rem "Roboto Mono", monospace; color: var(--muted); }
+.pctl { display: flex; gap: 6px; flex-wrap: wrap; }
+canvas#play { width: 100%; height: auto; aspect-ratio: 8 / 5; display: block; border-radius: 6px; background: var(--bg2); cursor: crosshair; touch-action: manipulation; }
+.readout { color: var(--fg); font-variant-numeric: tabular-nums; }
+.live { color: var(--primary); }
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><a href="./#projects">← Back to projects</a><button class="theme-btn" id="theme" type="button">Theme: auto</button></div>
+  <h1>Neural network playground</h1>
+  <p>Pick a class and click the plot to add points, or load a dataset. A 2-16-16-1 neural network with tanh activations,
+    trained by stochastic gradient descent with hand-written backpropagation, learns the decision boundary live.</p>
+  <div class="panel">
+    <div class="row"><span class="live" id="pstate">Neural network training</span>
+      <div class="toggle" role="group" aria-label="Class to add"><button id="cA" type="button" aria-pressed="true">● Class A</button><button id="cB" type="button" aria-pressed="false">● Class B</button></div></div>
+    <canvas id="play" width="480" height="300" aria-label="Click to add data points; a neural network learns to separate the two classes"></canvas>
+    <div class="row"><div class="pctl"><button class="chip" type="button" data-ds="moons">Moons</button><button class="chip" type="button" data-ds="circles">Circles</button><button class="chip" type="button" data-ds="xor">XOR</button><button class="chip" type="button" data-ds="clear">Clear</button></div>
+      <span>epoch <span class="readout" id="ep">0</span> · loss <span class="readout" id="loss">–</span></span></div>
+  </div>
+  <p>Source: <a href="https://github.com/yixi-k/yixi-k.github.io/blob/main/playground.html">playground.html on GitHub</a></p>
+</main>
+<script>
+(() => {
+  const cv = document.getElementById('play'), ctx = cv.getContext('2d');
+  const CW = cv.width, CH = cv.height, GX = 96, GY = 60;
+  const epEl = document.getElementById('ep'), lossEl = document.getElementById('loss'), stEl = document.getElementById('pstate');
+  let cls = 0, pts = [], epoch = 0, until = 2500;
+
+  // tiny MLP 2-16-16-1
+  const H1 = 16, H2 = 16;
+  const rn = () => (Math.random() * 2 - 1) * .8;
+  let W1, b1, W2, b2, W3, b3;
+  function init() {
+    W1 = Array.from({length: H1}, () => [rn(), rn()]); b1 = Array(H1).fill(0);
+    W2 = Array.from({length: H2}, () => Array.from({length: H1}, () => rn() / 2)); b2 = Array(H2).fill(0);
+    W3 = Array.from({length: H2}, () => rn() / 2); b3 = 0; epoch = 0; until = 2500;
+  }
+  const h1 = new Float64Array(H1), h2 = new Float64Array(H2);
+  function fwd(x, y) {
+    for (let i = 0; i < H1; i++) h1[i] = Math.tanh(W1[i][0] * x + W1[i][1] * y + b1[i]);
+    for (let j = 0; j < H2; j++) { let s = b2[j]; const w = W2[j]; for (let i = 0; i < H1; i++) s += w[i] * h1[i]; h2[j] = Math.tanh(s); }
+    let o = b3; for (let j = 0; j < H2; j++) o += W3[j] * h2[j];
+    return 1 / (1 + Math.exp(-o));
+  }
+  const d2 = new Float64Array(H2), d1 = new Float64Array(H1);
+  function step(lr) {
+    let L = 0;
+    for (let n = pts.length - 1; n > 0; n--) { const k = Math.random() * (n + 1) | 0; [pts[n], pts[k]] = [pts[k], pts[n]]; }
+    for (const p of pts) {
+      const o = fwd(p.x, p.y), g = o - p.c;
+      L += -(p.c * Math.log(o + 1e-9) + (1 - p.c) * Math.log(1 - o + 1e-9));
+      for (let j = 0; j < H2; j++) d2[j] = g * W3[j] * (1 - h2[j] * h2[j]);
+      for (let i = 0; i < H1; i++) { let s = 0; for (let j = 0; j < H2; j++) s += d2[j] * W2[j][i]; d1[i] = s * (1 - h1[i] * h1[i]); }
+      for (let j = 0; j < H2; j++) { W3[j] -= lr * g * h2[j]; b2[j] -= lr * d2[j]; for (let i = 0; i < H1; i++) W2[j][i] -= lr * d2[j] * h1[i]; }
+      b3 -= lr * g;
+      for (let i = 0; i < H1; i++) { W1[i][0] -= lr * d1[i] * p.x; W1[i][1] -= lr * d1[i] * p.y; b1[i] -= lr * d1[i]; }
+    }
+    epoch++;
+    return pts.length ? L / pts.length : 0;
+  }
+
+  // datasets in [-1, 1]
+  const g = () => (Math.random() + Math.random() + Math.random() - 1.5) * .12;
+  function make(kind) {
+    pts = [];
+    if (kind === 'moons') for (let k = 0; k < 120; k++) { const t = Math.random() * Math.PI, c = k % 2;
+      const x = c ? 1 - Math.cos(t) : Math.cos(t), y = c ? .5 - Math.sin(t) : Math.sin(t);
+      pts.push({x: (x - .5) * .75 + g(), y: (y - .25) * .9 + g(), c}); }
+    if (kind === 'circles') for (let k = 0; k < 140; k++) { const a = Math.random() * 2 * Math.PI, c = k % 2, r = c ? .25 : .7;
+      pts.push({x: Math.cos(a) * r + g(), y: Math.sin(a) * r * .9 + g(), c}); }
+    if (kind === 'xor') for (let k = 0; k < 140; k++) { const x = Math.random() * 1.8 - .9, y = Math.random() * 1.8 - .9;
+      if (Math.abs(x) < .06 || Math.abs(y) < .06) continue; pts.push({x, y, c: (x * y > 0) ? 1 : 0}); }
+    init();
+  }
+
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const rgb = h => { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const off = document.createElement('canvas'); off.width = GX; off.height = GY;
+  const octx = off.getContext('2d'), img = octx.createImageData(GX, GY);
+  function draw() {
+    const A = rgb(css('--accent') || '#6fb6e8'), B = rgb(css('--warm') || '#f08a5d'), bg = rgb(css('--bg2') || '#0f161d');
+    const d = img.data;
+    for (let j = 0; j < GY; j++) for (let i = 0; i < GX; i++) {
+      const p = pts.length ? fwd(i / (GX - 1) * 2 - 1, 1 - j / (GY - 1) * 2) : .5;
+      const c = p > .5 ? B : A, s = Math.abs(p - .5) * 2 * .55, k = (j * GX + i) * 4;
+      d[k] = bg[0] + (c[0] - bg[0]) * s; d[k + 1] = bg[1] + (c[1] - bg[1]) * s; d[k + 2] = bg[2] + (c[2] - bg[2]) * s; d[k + 3] = 255;
+    }
+    octx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = true; ctx.drawImage(off, 0, 0, CW, CH);
+    for (const p of pts) {
+      const X = (p.x + 1) / 2 * CW, Y = (1 - p.y) / 2 * CH, c = p.c ? B : A;
+      ctx.beginPath(); ctx.arc(X, Y, 4.5, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgb(${c})`; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = `rgb(${bg})`; ctx.stroke();
+    }
+  }
+
+  let lastLoss = 0;
+  function train(n) { if (pts.length) for (let k = 0; k < n; k++) lastLoss = step(.03); epEl.textContent = epoch; lossEl.textContent = pts.length ? lastLoss.toFixed(3) : '–'; stEl.textContent = !pts.length ? 'Add some points' : lastLoss < .08 ? 'Converged' : 'Neural network training'; }
+
+  cv.addEventListener('click', e => {
+    const r = cv.getBoundingClientRect();
+    pts.push({x: (e.clientX - r.left) / r.width * 2 - 1, y: 1 - (e.clientY - r.top) / r.height * 2, c: cls}); until = epoch + 1500;
+    if (reduce) { train(300); draw(); }
+  });
+  const setCls = c => { cls = c; document.getElementById('cA').setAttribute('aria-pressed', c === 0); document.getElementById('cB').setAttribute('aria-pressed', c === 1); };
+  document.getElementById('cA').addEventListener('click', () => setCls(0));
+  document.getElementById('cB').addEventListener('click', () => setCls(1));
+  document.querySelectorAll('[data-ds]').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.ds === 'clear') { pts = []; init(); } else make(b.dataset.ds);
+    if (reduce) train(400); draw();
+  }));
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  make('moons');
+  if (reduce) { train(400); draw(); }
+  else { train(1); draw(); setInterval(() => { if (pts.length && epoch < until) { train(2); draw(); } }, 40); }
+})();
+</script>
+<script>
+(() => {
+  // theme: auto -> light -> dark
+  const root = document.documentElement, btn = document.getElementById('theme');
+  const order = ['auto', 'light', 'dark'];
+  const apply = m => { if (m === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', m); btn.textContent = 'Theme: ' + m; };
+  let cur = 'auto';
+  try { cur = localStorage.getItem('theme') || 'auto'; } catch (e) {}
+  apply(cur);
+  btn.addEventListener('click', () => {
+    cur = order[(order.indexOf(cur) + 1) % order.length]; apply(cur);
+    try { localStorage.setItem('theme', cur); } catch (e) {}
+  });
+
+  // cite: show BibTeX and copy it
+  document.querySelectorAll('.cite').forEach(b => b.addEventListener('click', () => {
+    const pre = document.getElementById(b.dataset.bib);
+    const open = pre.hidden; pre.hidden = !open; b.setAttribute('aria-expanded', open);
+    if (!open) return;
+    const done = () => { b.textContent = 'Copied BibTeX'; setTimeout(() => b.textContent = 'Cite', 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(pre.textContent).then(done, () => {});
+  }));
+})();
+</script>
+</body>
+</html>

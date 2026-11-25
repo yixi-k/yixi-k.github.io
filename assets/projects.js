@@ -44,14 +44,14 @@ window.PROJECTS = [
     status: "Live",
     featured: true,
     visual: "playground",
-    summary: "The interactive demo at the top of this page: a small neural network written from scratch that learns a nonlinear decision boundary live in the browser.",
+    summary: "An interactive demo: a small neural network written from scratch that learns a nonlinear decision boundary live in the browser.",
     tags: ["Neural networks", "Backpropagation", "JavaScript", "Visualization"],
     problem: "Show, interactively, how a neural network learns to separate classes that no straight line can split.",
     approach: "A 2-16-16-1 multilayer perceptron with tanh activations, trained with per-sample stochastic gradient descent on binary cross-entropy. Backpropagation is implemented by hand, without libraries.",
-    results: "Runs live on this page. Visitors can add points or load Moons, Circles and XOR datasets and watch the decision boundary update.",
+    results: "Runs live in the browser. Visitors can add points or load Moons, Circles and XOR datasets and watch the decision boundary update.",
     links: [
-      { label: "Try it", href: "#top" },
-      { label: "Code", href: "https://github.com/yixi-k/yixi-k.github.io" }
+      { label: "Try it", href: "playground.html" },
+      { label: "Code", href: "https://github.com/yixi-k/yixi-k.github.io/blob/main/playground.html" }
     ]
   }
 
